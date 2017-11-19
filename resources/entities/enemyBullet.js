@@ -9,7 +9,7 @@ class EnemyBullet extends Entity {
 
         this.angle = 0;
 
-        this.speed = 13;
+        this.speed = 18;
     }
 
     draw() {
