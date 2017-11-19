@@ -7,7 +7,7 @@ let em = new eventsManager();
 let pm = new physicManager();
 let gm = new gameManager();
 //var hm  = new hudManager();
-//var am  = new audioManager();
+var am  = new audioManager();
 //var scm = new scoreManager();
 
 function getCurrentContext() { return context; }
@@ -18,7 +18,7 @@ function getGameManager() { return gm; }
 function getPhysicManager() { return pm; }
 function getMapManager() { return mm; }
 //function getHudManager() { return hm; }
-//function getAudioManager() { return am; }
+function getAudioManager() { return am; }
 //function getScoreManager() { return scm; }
 
 
@@ -40,7 +40,7 @@ function startLevel(l) {
         getHudManager().drawSubtitleText(gameScenes[l].subtitle);
         getHudManager().drawLevelHint(gameScenes[l].hint)
         */
-        setTimeout( () => {
+        setTimeout(() => {
             // getAudioManager().frequencyRamp(getAudioManager().defaultFrequency, 1);
             getGameManager().loadScene(gameScenes[0]);
         }, levelBriefDuration);
@@ -65,7 +65,7 @@ function startLevel(l) {
 function resourcesLoaded() {
 
     // Loading start level
-    setTimeout( () => { startLevel(1) }, 100 );
+    setTimeout(() => { startLevel(1) }, 100);
 
     console.log('loaded all');
     //getHudManager().drawHero('endlevel');

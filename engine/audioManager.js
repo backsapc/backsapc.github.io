@@ -64,7 +64,6 @@ class audioManager {
             this.load(sound, function() {
 
                 if(array.length === Object.keys(getAudioManager().clips).length) {
-                    //console.log(`invoked all`);
                     for(let sd in getAudioManager().clips) {
                         if(!getAudioManager().clips[sd].loaded) {
                             return;

@@ -11,7 +11,7 @@ class Player extends Entity {
     draw() {
         let mouseDelta = getEventsManager().getMouseDelta();
         let angle = Math.atan2(mouseDelta.y, mouseDelta.x);
-        getSpriteManager().drawSprite(context, 'survivor', this.posX, this.posY, angle);
+        getSpriteManager().drawSprite(context, 'player-crop', this.posX, this.posY, angle);
     }
 
     update() {

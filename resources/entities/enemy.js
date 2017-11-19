@@ -17,9 +17,9 @@ class Enemy extends Entity {
 
     draw() {
         if(this.difficulty >= 0.5) {
-            getSpriteManager().drawSprite(context, 'survivor', this.posX, this.posY, this.angle);
+            getSpriteManager().drawSprite(context, 'survivor-rifle', this.posX, this.posY, this.angle);
         } else {
-            getSpriteManager().drawSprite(context, 'survivor', this.posX, this.posY, this.angle);
+            getSpriteManager().drawSprite(context, 'survivor-handgun', this.posX, this.posY, this.angle);
         }
     }
 
