@@ -7,7 +7,7 @@ var gameScenes = [
         music: 'res/sounds/timecop-loop.mp3',
         hero: 'hero-1',
         hint: 'ESCAPE THE CLUB',
-        walkable: [22]
+        walkable: [21]
     },
 
     {

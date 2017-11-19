@@ -151,7 +151,7 @@ class mapManager {
                         if(obj === null) continue;
 
                         //let obj = Object.create(getGameManager().factory[entity.type]);
-                        obj.name = entity.name + entity.ID;
+                        obj.name = entity.name + entity.id;
                         obj.posX = entity.x;
                         obj.posY = entity.y - entity.height; // КОСТЫЛЬ!!!
                         obj.sizeX = entity.width;
@@ -159,7 +159,7 @@ class mapManager {
 
                         getGameManager().entities.push(obj);
 
-                        if(obj.name === 'player') {
+                        if(obj.name.includes('player')) {
                             getGameManager().initPlayer(obj);
                         }
 
