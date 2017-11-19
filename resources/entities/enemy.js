@@ -11,8 +11,8 @@ class Enemy extends Entity {
         this.canFire = true;
         this.canTestFire = true;
         this.noObstacles = false;
-        this.spotRadius = 2000;
-        this.minSpotRadius = 2000;
+        this.spotRadius = 200;
+        this.minSpotRadius = 200;
     }
 
     draw() {
