@@ -16,6 +16,13 @@ class Bullet extends Entity {
         getPhysicManager().update(this);
     }
 
+    lazyUpdate(){
+        let history = this.speed;
+        this.speed = history * 0.1;
+        getPhysicManager().update(this);
+        this.speed = history;
+    }
+
     onTouchEntity(entity) {
         if(entity.name.includes('enemy')) {
             let e = getGameManager().entity(entity.name);

@@ -43,27 +43,40 @@ class gameManager {
 
             if(this.player.moveX === 0 && this.player.moveY === 0) {
                 this.player.update();
+                this.lazyUpdate();
+                this.acceptKills();
                 this.draw(getCurrentContext());
                 return;
             }
-
-            for(let entity of this.entities) {
-                try { entity.update(); } catch(ex) { console.log(`Error updating entity ${entity.name}`); }
-            }
-
-            for(let entity of this.laterKill){
-                let idx = this.entities.indexOf(entity);
-                if(idx > -1)
-                    this.entities.splice(idx, 1);
-            }
-
-            if(this.laterKill.length > 0) {
-                this.laterKill.length = 0;
-            }
-
+            this.ordinaryUpdate();
+            this.acceptKills();
             this.draw(getCurrentContext());
         }
 
+    }
+
+    acceptKills(){
+        for(let entity of this.laterKill){
+            let idx = this.entities.indexOf(entity);
+            if(idx > -1)
+                this.entities.splice(idx, 1);
+        }
+
+        if(this.laterKill.length > 0) {
+            this.laterKill.length = 0;
+        }
+    }
+
+    ordinaryUpdate(){
+        for(let entity of this.entities) {
+            try { entity.update(); } catch(ex) { console.log(`Error updating entity ${entity.name}`); }
+        }
+    }
+
+    lazyUpdate(){
+        for(let entity of this.entities) {
+            try { entity.lazyUpdate(); } catch(ex) { console.log(`Error lazy updating entity ${entity.name}`); }
+        }
     }
 
     togglePause() {

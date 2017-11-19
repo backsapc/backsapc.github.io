@@ -52,6 +52,12 @@ class Enemy extends Entity {
         getPhysicManager().update(this);
     }
 
+    lazyUpdate(){
+        let history = this.speed;
+        this.speed = history * 0.1;
+        getPhysicManager().update(this);
+        this.speed = history;
+    }
 
     testFire() {
         if(this.canTestFire) {

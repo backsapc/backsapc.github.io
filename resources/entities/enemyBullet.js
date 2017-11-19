@@ -23,7 +23,9 @@ class EnemyBullet extends Entity {
     onTouchEntity(entity) {
         if(entity.name.includes('player')) {
 
-            let dist = Math.sqrt(Math.pow( (this.posX + this.sizeX/2) - (entity.posX + entity.sizeX/2), 2) + Math.pow( (this.posY + this.sizeY/2) - (entity.posY + entity.sizeY/2) , 2));
+            let dist = Math.sqrt(Math.pow( (this.posX + this.sizeX/2)
+                - (entity.posX + entity.sizeX/2), 2) + Math.pow( (this.posY + this.sizeY/2)
+                - (entity.posY + entity.sizeY/2) , 2));
             if( dist < 15 ) {
 
                // if(!getGameManager().cheats.baguvix) {
@@ -49,6 +51,13 @@ class EnemyBullet extends Entity {
             }
 
         }
+    }
+
+    lazyUpdate(){
+        let history = this.speed;
+        this.speed = history * 0.1;
+        getPhysicManager().update(this);
+        this.speed = history;
     }
 
     onTouchMap(idx) {
