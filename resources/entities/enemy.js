@@ -51,6 +51,34 @@ class Enemy extends Entity {
         getPhysicManager().update(this);
     }
 
+
+    testFire() {
+        if(this.canTestFire) {
+            let sampleBullet = new TestBullet();
+
+            sampleBullet.sizeX = 8;
+            sampleBullet.sizeY = 4;
+
+            sampleBullet.name = 'tbullet' + (++getGameManager().fireNum);
+
+            sampleBullet.angle = this.angle;
+
+            sampleBullet.posX = this.posX + this.sizeX / 2;
+            sampleBullet.posY = this.posY + this.sizeY / 2;
+
+            sampleBullet.creator = this.name;
+
+            getGameManager().entities.push(sampleBullet);
+
+            this.canTestFire = false;
+            setTimeout( () => {
+                let entity = getGameManager().entity(this.name);
+                if(entity !== null) entity.canTestFire = true;
+            }, Math.floor(sampleBullet.delay - 150 * getGameManager().entity(this.name).difficulty));
+        }
+
+    }
+
     onTouchEntity(entity) {
 
     }

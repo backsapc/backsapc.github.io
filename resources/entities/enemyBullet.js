@@ -13,7 +13,7 @@ class EnemyBullet extends Entity {
     }
 
     draw() {
-        getSpriteManager().drawSprite(context, 'bullet', this.posX, this.posY, this.angle);
+        getSpriteManager().drawSprite(context, 'tile1', this.posX, this.posY, this.angle);
     }
 
     update() {
@@ -23,18 +23,17 @@ class EnemyBullet extends Entity {
     onTouchEntity(entity) {
         if(entity.name.includes('player')) {
 
-
-
             let dist = Math.sqrt(Math.pow( (this.posX + this.sizeX/2) - (entity.posX + entity.sizeX/2), 2) + Math.pow( (this.posY + this.sizeY/2) - (entity.posY + entity.sizeY/2) , 2));
             if( dist < 15 ) {
 
-                if(!getGameManager().cheats.baguvix) {
+               // if(!getGameManager().cheats.baguvix) {
                     console.log(`KILLED PLAYER`);
                     getGameManager().reloadScene();
-                }
+               // }
 
                 this.kill();
             } else {
+                /*
                 let missSounds = [
                     'res/sounds/miss.mp3',
                     'res/sounds/miss2.mp3',
@@ -45,7 +44,7 @@ class EnemyBullet extends Entity {
                     'res/sounds/miss7.mp3',
                     'res/sounds/miss.mp3'
                 ];
-                getAudioManager().play(missSounds[Math.floor(Math.random() * 7)]);
+                getAudioManager().play(missSounds[Math.floor(Math.random() * 7)]); */
                 //console.log(`Almost killed: ${dist}!`);
             }
 
