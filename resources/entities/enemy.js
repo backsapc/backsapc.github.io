@@ -122,19 +122,14 @@ class Enemy extends Entity {
 
     kill() {
         this.alive = false;
-        /*
-            let body = new EnemyBody();
-            body.name = 'ebody' + (++getGameManager().fireNum);
-            body.angle = this.angle - Math.PI;
-            body.sizeX = 43;
-            body.sizeY = 19;
-            body.posX = this.posX;
-            body.posY = this.posY;
-            body.difficulty = this.difficulty;
-            body.ammo = (Math.random() < body.difficulty ) ? 2 : 1;
-
-            getGameManager().entities.unshift(body);
-        */
+        let energy = new Energy();
+        energy.name = 'energy' + (++getGameManager().fireNum);
+        energy.sizeX = 25;
+        energy.sizeY = 25;
+        energy.posX = this.posX;
+        energy.posY = this.posY;
+        energy.energyAmount = true ? 2 : 1;
+        getGameManager().entities.unshift(energy);
         getGameManager().kill(this);
     }
 }

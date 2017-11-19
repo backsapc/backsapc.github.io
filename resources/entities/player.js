@@ -26,10 +26,11 @@ class Player extends Entity {
     }
 
     onTouchEntity(entity) {
-        if(entity.name.includes('ebody')) {
-            if(entity.ammo !== 0) {
-                this.ammo += entity.ammo;
-                entity.ammo = 0;
+        if(entity.name.includes('energy')) {
+            if(entity.energyAmount !== 0) {
+                this.ammo += entity.energyAmount;
+                entity.energyAmount = 0;
+                entity.kill();
                // getAudioManager().play('res/sounds/pickup.mp3');
             }
             return;

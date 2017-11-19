@@ -13,7 +13,7 @@ class EnemyBullet extends Entity {
     }
 
     draw() {
-        getSpriteManager().drawSprite(context, 'tile1', this.posX, this.posY, this.angle);
+        getSpriteManager().drawSprite(context, 'bullet', this.posX, this.posY, this.angle);
     }
 
     update() {
