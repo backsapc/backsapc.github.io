@@ -55,7 +55,7 @@ class EnemyBullet extends Entity {
 
     lazyUpdate(){
         let history = this.speed;
-        this.speed = history * 0.1;
+        this.speed = history * 0.05;
         getPhysicManager().update(this);
         this.speed = history;
     }
