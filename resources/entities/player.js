@@ -20,7 +20,7 @@ class Player extends Entity {
 
     lazyUpdate(){
         let history = this.speed;
-        this.speed = history * 0.05;
+        this.speed = history * 0.01;
         getPhysicManager().update(this);
         this.speed = history;
     }
