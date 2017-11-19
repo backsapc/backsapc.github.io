@@ -73,14 +73,14 @@ class Player extends Entity {
         if(player.canFire && player.ammo !== 0) {
             player.ammo--;
             let bullet = new Bullet();
-            bullet.sizeX = 8;
-            bullet.sizeY = 4;
+            bullet.sizeX = 32;
+            bullet.sizeY = 16;
             bullet.name = 'bullet' + (++getGameManager().fireNum);
             let mouseDelta = getEventsManager().getMouseDelta();
             let angle = Math.atan2(mouseDelta.y, mouseDelta.x);
             bullet.angle = angle;
-            bullet.posX = this.posX + this.sizeX / 2 - 4 + Math.cos(angle) * 4;
-            bullet.posY = this.posY + this.sizeY / 2 - 4 + Math.sin(angle) * 4;
+            bullet.posX = this.posX + (this.sizeX / 2 + 4) * Math.cos(angle);// * 16;
+            bullet.posY = this.posY + (this.sizeY / 2 + 4) * Math.sin(angle);// * 16;
 
             getGameManager().entities.push(bullet);
 /*

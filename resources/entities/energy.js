@@ -15,6 +15,10 @@ class Energy extends Entity {
         //getPhysicManager().update(this);
     }
 
+    lazyUpdate(){
+
+    }
+
     onTouchEntity(entity) {
 
     }
