@@ -75,7 +75,7 @@ class Enemy extends Entity {
             setTimeout( () => {
                 let entity = getGameManager().entity(this.name);
                 if(entity !== null) entity.canTestFire = true;
-            }, Math.floor(sampleBullet.delay - 150 * getGameManager().entity(this.name).difficulty));
+            }, Math.floor(sampleBullet.delay - 150 * getGameManager().entity(this.name).difficulty * 4));
         }
 
     }
