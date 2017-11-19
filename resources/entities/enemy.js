@@ -37,7 +37,7 @@ class Enemy extends Entity {
             if(this.angle < 0)
                 this.angle += Math.PI * 2;
 
-            this.speed = 1;// * this.difficulty;
+            this.speed = 3;// * this.difficulty;
             this.testFire();
 
             if(this.noObstacles) {
