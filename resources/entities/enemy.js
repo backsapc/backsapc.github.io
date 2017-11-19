@@ -24,7 +24,8 @@ class Enemy extends Entity {
     }
 
     update() {
-        let distanceToPlayer = Math.sqrt( Math.pow(this.posX - getGameManager().player.posX, 2) + Math.pow(this.posY - getGameManager().player.posY, 2) );
+        let distanceToPlayer = Math.sqrt( Math.pow(this.posX - getGameManager().player.posX, 2)
+            + Math.pow(this.posY - getGameManager().player.posY, 2) );
 
         if( distanceToPlayer < this.minSpotRadius + this.spotRadius * this.difficulty && distanceToPlayer > 0) {
 
