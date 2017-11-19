@@ -69,19 +69,16 @@ class Player extends Entity {
     }
 
     fire() {
-        if(this.canFire && this.ammo !== 0) {
+        let player = getGameManager().player;
+        if(player.canFire && player.ammo !== 0) {
+            player.ammo--;
             let bullet = new Bullet();
-
             bullet.sizeX = 8;
             bullet.sizeY = 4;
-
             bullet.name = 'bullet' + (++getGameManager().fireNum);
-
             let mouseDelta = getEventsManager().getMouseDelta();
             let angle = Math.atan2(mouseDelta.y, mouseDelta.x);
-
             bullet.angle = angle;
-
             bullet.posX = this.posX + this.sizeX / 2 - 4 + Math.cos(angle) * 4;
             bullet.posY = this.posY + this.sizeY / 2 - 4 + Math.sin(angle) * 4;
 
@@ -90,8 +87,8 @@ class Player extends Entity {
             getAudioManager().play('res/sounds/shot.mp3');
             getScoreManager().shotFired();
 */
-            this.canFire = false;
-            setTimeout( () => { getGameManager().player.canFire = true; }, bullet.delay);
+            player.canFire = false;
+            setTimeout(() => { getGameManager().player.canFire = true; }, bullet.delay);
         }
 
     }
