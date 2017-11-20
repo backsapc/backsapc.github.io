@@ -6,7 +6,7 @@ class gameManager {
         this.player = null;
         this.laterKill = [];
         this.worldUpdateTimer = null;
-        this.pause = false;
+        // this.pause = false;
     }
 
     initPlayer(obj) {
@@ -27,7 +27,7 @@ class gameManager {
             getEventsManager().action['pause'] = false;
         }
 
-        if(!this.pause) {
+        // if(!this.pause) {
             this.player.moveX = 0;
             this.player.moveY = 0;
             if(getEventsManager().action['up']) this.player.moveY = -1;
@@ -35,7 +35,6 @@ class gameManager {
             if(getEventsManager().action['left']) this.player.moveX = -1;
             if(getEventsManager().action['right']) this.player.moveX = 1;
             if(getEventsManager().action['fire']) this.player.fire();
-
             if(getEventsManager().action['restart']) {
                 this.reloadScene();
                 getEventsManager().action['restart'] = false;
@@ -51,7 +50,7 @@ class gameManager {
             this.ordinaryUpdate();
             this.acceptKills();
             this.draw(getCurrentContext());
-        }
+        // }
 
     }
 
@@ -61,7 +60,6 @@ class gameManager {
             if(idx > -1)
                 this.entities.splice(idx, 1);
         }
-
         if(this.laterKill.length > 0) {
             this.laterKill.length = 0;
         }
@@ -78,7 +76,7 @@ class gameManager {
             try { entity.lazyUpdate(); } catch(ex) { console.log(`Error lazy updating entity ${entity.name}`); }
         }
     }
-
+/*
     togglePause() {
         if(this.pause) {
             console.log(`UNPAUSE`);
@@ -95,7 +93,7 @@ class gameManager {
         // getHudManager().drawSubtitleText('Press  \`P\`  to  continue');
         this.pause = true;
     }
-
+*/
     entity(name) {
         for(let entity of this.entities){
             if(entity.name === name) {
@@ -112,7 +110,7 @@ class gameManager {
             for(let entity of this.entities) {
                 entity.draw(getCurrentContext());
             }
-            // getHudManager().drawGameHud();
+            getHudManager().drawGameHud();
         }
 
 
@@ -120,14 +118,11 @@ class gameManager {
 
     loadScene(sc) {
         this.clearScreen();
-
         getMapManager().jsonLoaded = false;
         getMapManager().imagesLoaded = false;
         getMapManager().imagesLoadCounter = 0;
-        getMapManager().camera = {x: 0, y: 0, w: 800, h: 600};
-
+        getMapManager().camera = {x: 0, y: 0, w: 900, h: 768};
         getMapManager().loadMap('resources/maps/' + sc.map);
-
         console.log(`Loading scene "${sc.sceneName}"`);
         setTimeout(this.loadSceneFinish, 10);
     }
@@ -146,16 +141,14 @@ class gameManager {
 
     levelCompleted() {
 
-        if( getEventsManager().action['fire'] ) {
-
+        if(getEventsManager().action['fire']) {
             completedLevel(getScoreManager().currentLevel);
-
         } else {
             getGameManager().stopScene();
-            getAudioManager().frequencyRamp(getAudioManager().lowFrequency, 1);
-            getHudManager().drawHero('endlevel');
-            getHudManager().drawEndLevel();
-            setTimeout( getGameManager().levelCompleted, 20 );
+            // getAudioManager().frequencyRamp(getAudioManager().lowFrequency, 1);
+            // getHudManager().drawHero('endlevel');
+            // getHudManager().drawEndLevel();
+            setTimeout(getGameManager().levelCompleted, 20);
         }
 
     }

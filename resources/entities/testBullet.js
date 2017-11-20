@@ -1,9 +1,6 @@
 class TestBullet extends Entity {
     constructor() {
         super();
-
-        this.moveX = 0;
-        this.moveY = 0;
         this.delay = 200;
         this.angle = null;
         this.speed = 20;

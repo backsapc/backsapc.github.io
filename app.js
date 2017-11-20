@@ -6,7 +6,7 @@ let sm = new spriteManager();
 let em = new eventsManager();
 let pm = new physicManager();
 let gm = new gameManager();
-//var hm  = new hudManager();
+var hm  = new hudManager();
 var am  = new audioManager();
 //var scm = new scoreManager();
 
@@ -17,7 +17,7 @@ function getSpriteManager() { return sm; }
 function getGameManager() { return gm; }
 function getPhysicManager() { return pm; }
 function getMapManager() { return mm; }
-//function getHudManager() { return hm; }
+function getHudManager() { return hm; }
 function getAudioManager() { return am; }
 //function getScoreManager() { return scm; }
 

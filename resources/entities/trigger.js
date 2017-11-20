@@ -1,7 +1,6 @@
 class Trigger extends Entity {
     constructior() {
         this.name = null;
-
     }
 
     draw() {
@@ -9,7 +8,7 @@ class Trigger extends Entity {
     }
 
     update() {
-        //getPhysicManager().update(this);
+        // getPhysicManager().update(this);
     }
 
     onTouchEntity(entity) {

@@ -2,8 +2,6 @@ class Player extends Entity {
     constructor() {
         super();
         this.ammo = 6;
-        this.moveX = 1;
-        this.moveY = 0;
         this.speed = 5;
         this.canFire = true;
     }

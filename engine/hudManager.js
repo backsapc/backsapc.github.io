@@ -4,28 +4,28 @@ class hudManager {
     }
 
     drawGameHud() {
-
         let ctx = getCurrentContext();
-
-        // Drawing ammo box
         let playerAmmo = getGameManager().player.ammo;
-        let hudAmmoImage = getSpriteManager().getSprite('bullet-hud');
+        let hudAmmoImage = getSpriteManager().getSprite('energy1');
         let hudAmmoPadding = 20;
         let ammoPos = { x: hudAmmoPadding, y: getCurrentCanvas().height - hudAmmoPadding - hudAmmoImage.h };
-
-        for(let i = 0; i < playerAmmo; i++) {
-            ctx.drawImage(getSpriteManager().image,
-                hudAmmoImage.x,
-                hudAmmoImage.y,
-                hudAmmoImage.w,
-                hudAmmoImage.h,
-                ammoPos.x + ( (hudAmmoImage.w + 5) * i),
-                ammoPos.y,
-                hudAmmoImage.w,
-                hudAmmoImage.h
-            );
-        }
-
+        ctx.drawImage(getSpriteManager().image,
+            hudAmmoImage.x,
+            hudAmmoImage.y,
+            hudAmmoImage.w,
+            hudAmmoImage.h,
+            ammoPos.x,
+            ammoPos.y,
+            hudAmmoImage.w,
+            hudAmmoImage.h
+        );
+        let delta = hudAmmoImage.w + 5;
+        ctx.font = '30px arcade-classic';
+        ctx.textBaseline = "top";
+        context.textAlign = "left";
+        ctx.fillStyle = 'white';
+        ctx.fillText(playerAmmo, ammoPos.x + delta, ammoPos.y + hudAmmoImage.h / 4);
+        
         // Drawing score
         ctx.font = '30px arcade-classic';
         ctx.textBaseline = "top";
@@ -44,7 +44,7 @@ class hudManager {
         let lineheight = size;
         let lines = text.split('\n');
 
-        for (var i = 0; i<lines.length; i++)
+        for (let i = 0; i<lines.length; i++)
             ctx.fillText(lines[i], x, y + (i*lineheight) );
 
         //ctx.fillText(text, getCurrentCanvas().width / 2, getCurrentCanvas().height / 2);
@@ -67,7 +67,14 @@ class hudManager {
 
     drawEndLevel() {
         this.drawTitleText(`Great  job!`);
-        this.drawSubtitleText(`Enemies  killed:  ${getScoreManager().currentKills()}\nShots  fired:  ${getScoreManager().currentShots()}\n Time:  ${getScoreManager().getTimeString(getScoreManager().getCurrentTime())}\nScore:  ${getScoreManager().currentScore()}\nKilling  bonus:  ${getScoreManager().getCurrentAmmoBonus()}\nSpeed  bonus:  ${getScoreManager().getCurrentTimeBonus()}\n---------------------------\nTotal  score:  ${getScoreManager().getCurrentTotalScore()}`);
+        this.drawSubtitleText(`Enemies  killed:  ${getScoreManager().currentKills()}\n
+        Shots  fired:  ${getScoreManager().currentShots()}\n 
+        Time:  ${getScoreManager().getTimeString(getScoreManager().getCurrentTime())}\n
+        Score:  ${getScoreManager().currentScore()}\n
+        Killing  bonus:  ${getScoreManager().getCurrentAmmoBonus()}\n
+        Speed  bonus:  ${getScoreManager().getCurrentTimeBonus()}
+        \n---------------------------\n
+        Total  score:  ${getScoreManager().getCurrentTotalScore()}`);
         this.drawPressFireText();
     }
 

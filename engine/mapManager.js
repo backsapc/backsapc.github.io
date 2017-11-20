@@ -126,6 +126,8 @@ class mapManager {
             return false;
         }
         console.log('parsing entities');
+        let computedSpotRadius = Math.pow(Math.pow(getMapManager().camera.h / 3, 2.0)
+            + Math.pow(getMapManager().camera.w / 3, 2.0), 0.5);
         for(let layer of this.mapData.layers) {
             if(layer.type === 'objectgroup') {
                 for(let entity of layer.objects) {
@@ -141,6 +143,7 @@ class mapManager {
                             case 'Enemy':
                                 obj = new Enemy();
                                 obj.difficulty = entity.properties.difficulty;
+                                obj.minSpotRadius = computedSpotRadius;
                                 break;
 
                             case 'PlayerTrigger':

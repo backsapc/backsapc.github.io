@@ -3,16 +3,14 @@ class Enemy extends Entity {
         super();
         this.ammo = 0;
         this.alive = true;
-        this.moveX = 0;
-        this.moveY = 0;
         this.speed = 1;
-        this.angle = 0;
         this.difficulty = 0.1;
         this.canFire = true;
         this.canTestFire = true;
         this.noObstacles = false;
         this.spotRadius = 200;
         this.minSpotRadius = 200;
+        this.playerWasCaught = false;
     }
 
     draw() {
@@ -26,29 +24,34 @@ class Enemy extends Entity {
     update() {
         let distanceToPlayer = Math.sqrt( Math.pow(this.posX - getGameManager().player.posX, 2)
             + Math.pow(this.posY - getGameManager().player.posY, 2) );
-
-        if( distanceToPlayer < this.minSpotRadius + this.spotRadius * this.difficulty && distanceToPlayer > 0) {
-
+        if( distanceToPlayer < this.minSpotRadius + this.spotRadius * this.difficulty && distanceToPlayer > 0
+            || this.playerWasCaught) {
             let playerDelta = {
                 x: getGameManager().player.posX - this.posX,
                 y: getGameManager().player.posY - this.posY
             };
-
+            let lastAngle = this.angle;
             this.angle = Math.atan2(playerDelta.y, playerDelta.x);
             if(this.angle < 0)
                 this.angle += Math.PI * 2;
-
-            this.speed = 3;// * this.difficulty;
+            this.speed = 3 * this.difficulty;
             this.testFire();
-
             if(this.noObstacles) {
                 this.fire();
+                this.playerWasCaught = true;
             }
 
+            if(!this.noObstacles && this.playerWasCaught === true){
+                this.angle = lastAngle;
+            }
+
+            if(!this.noObstacles && this.playerWasCaught === false) {
+                this.angle = lastAngle;
+                this.speed = 0;
+            }
         } else {
             this.speed = 0;
         }
-
         getPhysicManager().update(this);
     }
 
@@ -62,21 +65,14 @@ class Enemy extends Entity {
     testFire() {
         if(this.canTestFire) {
             let sampleBullet = new TestBullet();
-
             sampleBullet.sizeX = 8;
             sampleBullet.sizeY = 4;
-
             sampleBullet.name = 'tbullet' + (++getGameManager().fireNum);
-
             sampleBullet.angle = this.angle;
-
             sampleBullet.posX = this.posX + this.sizeX / 2;
             sampleBullet.posY = this.posY + this.sizeY / 2;
-
             sampleBullet.creator = this.name;
-
             getGameManager().entities.push(sampleBullet);
-
             this.canTestFire = false;
             setTimeout( () => {
                 let entity = getGameManager().entity(this.name);
