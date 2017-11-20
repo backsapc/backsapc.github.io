@@ -197,7 +197,7 @@
                  "y":319
                 }, 
                 {
-                 "height":26,
+                 "height":46.0441687652474,
                  "id":18,
                  "name":"trigger",
                  "properties":
@@ -211,9 +211,9 @@
                  "rotation":-0.169045,
                  "type":"PlayerTrigger",
                  "visible":true,
-                 "width":29.75,
-                 "x":1535.125,
-                 "y":291
+                 "width":44.6909269628854,
+                 "x":1529.125,
+                 "y":281
                 }],
          "opacity":1,
          "type":"objectgroup",
