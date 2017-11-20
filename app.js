@@ -54,9 +54,10 @@ function startLevel(l) {
 }
 
 function resourcesLoaded() {
-
+    let currentLevel = getScoreManager().currentLevel;
+    currentLevel = currentLevel === undefined ? 0 : currentLevel;
     // Loading start level
-    setTimeout(() => { startLevel(0) }, 100);
+    setTimeout(() => { startLevel(currentLevel) }, 100);
     console.log('loaded all');
 }
 
@@ -112,7 +113,6 @@ function div(val, by){
 }
 
 function scoreboard(en) {
-
     let scoreboardElement = document.getElementById('scoreboard');
     let scoreboardTextElement = document.getElementById('scoreboard-text');
     if(en) {

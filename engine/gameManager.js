@@ -207,7 +207,7 @@ class gameManager {
 
     loadResourcesFinish() {
         //console.log(`Loading resources:`);
-         let jobs = 3;
+        let jobs = 3;
         if(getSpriteManager().jsonLoaded) {
             jobs--;
            // console.log(`[R]: Atlas JSON loaded`);
