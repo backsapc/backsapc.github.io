@@ -9,7 +9,7 @@ class Player extends Entity {
     draw() {
         let mouseDelta = getEventsManager().getMouseDelta();
         let angle = Math.atan2(mouseDelta.y, mouseDelta.x);
-        getSpriteManager().drawSprite(context, 'survivor-handgun', this.posX, this.posY, angle);
+        getSpriteManager().drawSprite(context, 'player-crop', this.posX, this.posY, angle);
     }
 
     update() {
@@ -34,7 +34,7 @@ class Player extends Entity {
             return;
         }
 
-        if(entity.name.includes('trigger_levelend')) {
+        if(entity.name.includes('trigger')) {
             console.log('Completed the level!');
             this.scoreLevel();
             return;
@@ -55,11 +55,9 @@ class Player extends Entity {
     }
 
     scoreLevel() {
-        /*
         getScoreManager().recordTime();
         getScoreManager().calculateTotal();
         getGameManager().levelCompleted();
-        */
     }
 
     kill() {

@@ -11,6 +11,10 @@ class Trigger extends Entity {
         // getPhysicManager().update(this);
     }
 
+    lazyUpdate() {
+        // getPhysicManager().update(this);
+    }
+
     onTouchEntity(entity) {
 
     }

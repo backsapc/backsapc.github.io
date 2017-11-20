@@ -67,15 +67,16 @@ class hudManager {
     }
 
     drawEndLevel() {
-        this.drawTitleText(`Great  job!`);
-        this.drawSubtitleText(`Enemies  killed:  ${getScoreManager().currentKills()}\n
+        this.drawTitleText('Great  job!');
+      /*  this.drawSubtitleText(`Enemies  killed:  ${getScoreManager().currentKills()}\n
         Shots  fired:  ${getScoreManager().currentShots()}\n 
         Time:  ${getScoreManager().getTimeString(getScoreManager().getCurrentTime())}\n
         Score:  ${getScoreManager().currentScore()}\n
         Killing  bonus:  ${getScoreManager().getCurrentAmmoBonus()}\n
         Speed  bonus:  ${getScoreManager().getCurrentTimeBonus()}
         \n---------------------------\n
-        Total  score:  ${getScoreManager().getCurrentTotalScore()}`);
+        Total  score:  ${getScoreManager().getCurrentTotalScore()}`); */
+        //this.drawSubtitleText('Press mouse key to continue');
         this.drawPressFireText();
     }
 

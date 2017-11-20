@@ -149,11 +149,15 @@ class mapManager {
                             case 'PlayerTrigger':
                                 obj = new Trigger();
                                 break;
+
+                            case 'Energy':
+                                obj = new Energy();
+                                obj.energyAmount = entity.properties.energyAmount;
+                                break;
                         }
 
                         if(obj === null) continue;
 
-                        //let obj = Object.create(getGameManager().factory[entity.type]);
                         obj.name = entity.name + entity.id;
                         obj.posX = entity.x;
                         obj.posY = entity.y - entity.height; // КОСТЫЛЬ!!!

@@ -12,7 +12,7 @@ class Energy extends Entity {
     }
 
     update() {
-        //getPhysicManager().update(this);
+      //  getPhysicManager().update(this);
     }
 
     lazyUpdate(){

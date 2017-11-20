@@ -5,7 +5,7 @@ var gameScenes = [
         subtitle: "So, hello, I'm James. You're here to participate\n" +
         "in the Great Experiment.\n" +
         "Test your skills, you can control time now.\n",
-        map: 'fight.json',
+        map: 'beginning.json',
         music: 'resources/sounds/game-music.mp3',
         hero: 'hero-1',
         hint: "Destroy your enemies. Time goes with your moves.",
@@ -18,7 +18,7 @@ var gameScenes = [
         "Does we have right to control it?... Don't think so..\n" +
         "Here's gun for you, but I don't have energy for it.\n" +
         "You have to leave the lab now, run!",
-        map: 'bloodshedin.json',
+        map: 'dark-time.json',
         music: 'resources/sounds/game-music.mp3',
         hero: 'hero-2',
         hint: 'Find energy for your gun. Escape the lab.',
@@ -30,7 +30,7 @@ var gameScenes = [
         title: 'Level 3: pull yourself together!',
         subtitle: "Good! If you are reading this, then you must be tired, but alive.\n" +
         "Here's no time to complain. We can't allow them to destroy us.",
-        map: 'ambush.json',
+        map: 'weak.json',
         music: 'resources/sounds/game-music.mp3',
         hero: 'hero-3',
         hint: 'Kill your enemies. Do not die.',
@@ -41,7 +41,7 @@ var gameScenes = [
         sceneName: 'final',
         title: 'Level 4: final',
         subtitle: "It's time for the attack.. They aren't ready for you.\n Save world from thing I've created.\n" +
-        "Destroy the lab. There're tens of them. Good luck!",
+        "Destroy the lab. There're tens of enemies. Good luck!",
         map: 'final.json',
         music: 'resources/sounds/game-music.mp3',
         hero: 'hero-4',

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>SUPER COLD</title>
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="w3.css">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet"
     href="https://fonts.googleapis.com/css?family=Allerta+Stencil">
@@ -18,21 +18,37 @@
                     <div class="w3-center w3-padding w3-xxlarge w3-black w3-allerta">
                         SUPER COLD
                     </div>
-                    <div>
-                        <button class="w3-allerta w3-black w3-xlarge" style="width:100%;"
-                        onclick="loadAll()">
-                            Launch
-                        </button>
+                    <div id="main-menu" style="display: block;">
+                        <div>
+                            <button class="w3-allerta w3-black w3-xlarge" style="width:100%;"
+                                    onclick="loadAll()">
+                                Launch
+                            </button>
+                        </div>
+                        <div>
+                            <button class="w3-allerta w3-black w3-xlarge" style="width:100%;">
+                                Scoreboard
+                            </button>
+                        </div>
+                        <div>
+                            <button class="w3-allerta w3-black w3-xlarge" style="width:100%;">
+                                About
+                            </button>
+                        </div>
                     </div>
-                    <div>
-                        <button class="w3-allerta w3-black w3-xlarge" style="width:100%;">
-                            Scoreboard
-                        </button>
-                    </div>
-                    <div>
-                        <button class="w3-allerta w3-black w3-xlarge" style="width:100%;">
-                            About
-                        </button>
+                    <div id="in-game-menu" style="display: none;">
+                        <div>
+                            <button class="w3-allerta w3-black w3-xlarge" style="width:100%;"
+                                    onclick="togglePause();">
+                                Resume
+                            </button>
+                        </div>
+                        <div>
+                            <button class="w3-allerta w3-black w3-xlarge" style="width:100%;"
+                            onclick="toMainMenu();">
+                                Main menu
+                            </button>
+                        </div>
                     </div>
                 </div>
                 <canvas id="canvas" width="900px" height="640px" style="display: none;">
@@ -44,6 +60,8 @@
     let canvas = document.getElementById('canvas');
     let context = canvas.getContext('2d');
     let menu = document.getElementById('menu');
+    let inGameMenu = document.getElementById('in-game-menu');
+    let mainMenu = document.getElementById('main-menu');
 </script>
 <script src="engine/mapManager.js"></script>
 <script src="engine/spriteManager.js"></script>

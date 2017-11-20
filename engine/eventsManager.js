@@ -13,6 +13,7 @@ class eventsManager {
         this.bind[32] = 'fire';
         this.bind[82] = 'restart';
         this.bind[80] = 'pause';
+        this.bind[27] = 'pause';
         window.addEventListener('mousedown', this.onMouseDown);
         window.addEventListener('mouseup', this.onMouseUp);
         window.addEventListener('mousemove', this.onMouseMove);
@@ -29,6 +30,8 @@ class eventsManager {
     }
 
     onMouseDown(event) {
+        if(getGameManager().pause)
+            return;
         getEventsManager().action['fire'] = true;
     }
 
@@ -37,10 +40,14 @@ class eventsManager {
     }
 
     onMouseMove(event) {
+        if(getGameManager().pause)
+            return;
         getEventsManager().mouse = { x: event.clientX, y: event.clientY };
     }
 
     onKeyDown(event) {
+        if(getGameManager().pause)
+            return;
         let action = getEventsManager().bind[event.keyCode];
         if(action === undefined) {
             return;
@@ -49,6 +56,8 @@ class eventsManager {
     }
 
     onKeyUp(event) {
+        if(getGameManager().pause)
+            return;
         let action = getEventsManager().bind[event.keyCode];
         if(action === undefined) {
             return;

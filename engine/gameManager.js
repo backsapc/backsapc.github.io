@@ -23,7 +23,7 @@ class gameManager {
         }
 
         if(getEventsManager().action['pause']) {
-            this.togglePause();
+            togglePause();
             getEventsManager().action['pause'] = false;
         }
 
@@ -76,24 +76,22 @@ class gameManager {
             try { entity.lazyUpdate(); } catch(ex) { console.log(`Error lazy updating entity ${entity.name}`); }
         }
     }
-/*
+
     togglePause() {
         if(this.pause) {
             console.log(`UNPAUSE`);
-            // getScoreManager().timerUnpause();
-            // getAudioManager().frequencyRamp(getAudioManager().defaultFrequency, 1);
+            getScoreManager().timerUnpause();
+            getAudioManager().frequencyRamp(getAudioManager().defaultFrequency, 1);
             this.pause = false;
             return;
         }
         console.log(`PAUSE`);
-        // getScoreManager().timerPause();
-        // getAudioManager().frequencyRamp(getAudioManager().lowFrequency, 1);
-        // getGameManager().clearScreen();
-        // getHudManager().drawTitleText('Pause');
-        // getHudManager().drawSubtitleText('Press  \`P\`  to  continue');
+        getScoreManager().timerPause();
+        getAudioManager().frequencyRamp(getAudioManager().lowFrequency, 1);
+        getGameManager().clearScreen();
         this.pause = true;
     }
-*/
+
     entity(name) {
         for(let entity of this.entities){
             if(entity.name === name) {
@@ -140,7 +138,6 @@ class gameManager {
     }
 
     levelCompleted() {
-
         if(getEventsManager().action['fire']) {
             completedLevel(getScoreManager().currentLevel);
         } else {
@@ -236,6 +233,10 @@ class gameManager {
 
     play() {
         this.worldUpdateTimer = setInterval(updateWorld, gameSpeed);
+    }
+
+    stop() {
+        clearInterval(getGameManager().worldUpdateTimer);
     }
 
 }
