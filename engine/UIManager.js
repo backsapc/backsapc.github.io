@@ -1,4 +1,4 @@
-class hudManager {
+class UIManager {
     constructor() {
 
     }
@@ -31,7 +31,7 @@ class hudManager {
         ctx.textBaseline = "top";
         context.textAlign = "left";
         ctx.fillStyle = 'white';
-       // ctx.fillText(getScoreManager().currentScore(), 20, 20);
+        ctx.fillText(getStatisticsManager().currentScore(), 20, 20);
     }
 
     drawText(text, size, x, y, baseline) {
@@ -39,15 +39,10 @@ class hudManager {
         ctx.font = `${size}px AllertaStencil`;
         ctx.textBaseline = baseline;
         context.textAlign = 'center';
-        //ctx.fillStyle = 'white';
-
         let lineheight = size;
         let lines = text.split('\n');
-
         for (let i = 0; i<lines.length; i++)
             ctx.fillText(lines[i], x, y + (i*lineheight) );
-
-        //ctx.fillText(text, getCurrentCanvas().width / 2, getCurrentCanvas().height / 2);
     }
 
     drawTitleText(text) {
@@ -63,19 +58,18 @@ class hudManager {
 
     drawPressFireText() {
         getCurrentContext().fillStyle = 'white';
-        this.drawText('Press  fire  button', 18, getCurrentCanvas().width / 2, getCurrentCanvas().height - 30, 'bottom');
+        this.drawText('Press fire button', 18, getCurrentCanvas().width / 2, getCurrentCanvas().height - 30, 'bottom');
     }
 
     drawEndLevel() {
         this.drawTitleText('Great  job!');
-      /*  this.drawSubtitleText(`Enemies  killed:  ${getScoreManager().currentKills()}\n
-        Shots  fired:  ${getScoreManager().currentShots()}\n 
-        Time:  ${getScoreManager().getTimeString(getScoreManager().getCurrentTime())}\n
-        Score:  ${getScoreManager().currentScore()}\n
-        Killing  bonus:  ${getScoreManager().getCurrentAmmoBonus()}\n
-        Speed  bonus:  ${getScoreManager().getCurrentTimeBonus()}
-        \n---------------------------\n
-        Total  score:  ${getScoreManager().getCurrentTotalScore()}`); */
+        this.drawSubtitleText(
+            `Enemies  killed:  ${getStatisticsManager().currentKills()}\n
+            Time:  ${getStatisticsManager().getTimeString(getStatisticsManager().getCurrentTime())}\n
+            Score:  ${getStatisticsManager().currentScore()}\n
+            \n---------------------------\n
+            Total  score:  ${getStatisticsManager().getCurrentTotalScore()}`
+        );
         //this.drawSubtitleText('Press mouse key to continue');
         this.drawPressFireText();
     }

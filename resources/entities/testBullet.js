@@ -8,7 +8,7 @@ class TestBullet extends Entity {
     }
 
     draw() {
-        //sm.drawSprite(context, 'bullet', this.posX, this.posY);
+        //spriteManager.drawSprite(context, 'bullet', this.posX, this.posY);
     }
 
     update() {

@@ -1,60 +1,70 @@
-var gameSpeed = 20;
+let gameSpeed = 20;
 let levelBriefDuration = 5000;
 
-let mm = new mapManager();
-let sm = new spriteManager();
-let em = new eventsManager();
-let pm = new physicManager();
-let gm = new gameManager();
-let hm = new hudManager();
-let am = new audioManager();
-var scm = new scoreManager();
+let mapManager = new MapManager();
+let spriteManager = new SpriteManager();
+let eventsManager = new EventsManager();
+let physicsManager = new PhysicsManager();
+let gameManager = new GameManager();
+let uiManager = new UIManager();
+let audioManager = new AudioManager();
+let statisticsManager = new StatisticsManager();
 
 function getCurrentContext() { return context; }
 function getCurrentCanvas() { return canvas; }
-function getEventsManager() { return em; }
-function getSpriteManager() { return sm; }
-function getGameManager() { return gm; }
-function getPhysicManager() { return pm; }
-function getMapManager() { return mm; }
-function getHudManager() { return hm; }
-function getAudioManager() { return am; }
-function getScoreManager() { return scm; }
+function getEventsManager() { return eventsManager; }
+function getSpriteManager() { return spriteManager; }
+function getGameManager() { return gameManager; }
+function getPhysicManager() { return physicsManager; }
+function getMapManager() { return mapManager; }
+function getUIManager() { return uiManager; }
+function getAudioManager() { return audioManager; }
+function getStatisticsManager() { return statisticsManager; }
 
+function getGameSpeed() {
+    return gameSpeed;
+}
 
 function completedLevel(l) {
     startLevel(l + 1);
 }
+
+let delayStart = function (l) {
+    setTimeout(() => {
+        getAudioManager().frequencyRamp(getAudioManager().defaultFrequency, 1);
+        getGameManager().loadScene(gameScenes[l]);
+    }, levelBriefDuration);
+};
+
+let showLevelDescription = function (l) {
+    getUIManager().drawTitleText(gameScenes[l].title);
+    getUIManager().drawSubtitleText(gameScenes[l].subtitle);
+};
 
 function startLevel(l) {
     if(l < gameScenes.length) {
         getAudioManager().stopAll();
         getAudioManager().play(gameScenes[l].music, { looping: true });
         getAudioManager().filter.frequency.value = getAudioManager().lowFrequency;
-        getScoreManager().currentLevel = l;
-        getScoreManager().save();
+        getStatisticsManager().currentLevel = l;
+        getStatisticsManager().save();
         getGameManager().clearScreen();
-        getHudManager().drawTitleText(gameScenes[l].title);
-        getHudManager().drawSubtitleText(gameScenes[l].subtitle);
-        setTimeout(() => {
-            getAudioManager().frequencyRamp(getAudioManager().defaultFrequency, 1);
-            getGameManager().loadScene(gameScenes[l]);
-        }, levelBriefDuration);
-
+        showLevelDescription(l);
+        delayStart(l);
     } else {
         let totalScore = 0;
-        for(let s of getScoreManager().storage) {
+        for(let s of getStatisticsManager().storage) {
             totalScore += s.score;
         }
-        getScoreManager().save();
+        getStatisticsManager().save();
         getGameManager().clearScreen();
-        getHudManager().drawTitleText("You've done it, awesome!");
-        getHudManager().drawSubtitleText(`Total score: ${totalScore}`);
+        getUIManager().drawTitleText("You've done it, awesome!");
+        getUIManager().drawSubtitleText(`Total score: ${totalScore}`);
     }
 }
 
 function resourcesLoaded() {
-    let currentLevel = getScoreManager().currentLevel;
+    let currentLevel = getStatisticsManager().currentLevel;
     currentLevel = currentLevel === undefined ? 0 : currentLevel;
     // Loading start level
     setTimeout(() => { startLevel(currentLevel) }, 100);
@@ -85,9 +95,9 @@ function switchGlobalUI() {
 
 
 function storageAvailable(type) {
+    let storage = window[type];
     try {
-        var storage = window[type],
-            x = '__storage_test__';
+        let x = '__storage_test__';
         storage.setItem(x, x);
         storage.removeItem(x);
         return true;
@@ -121,10 +131,10 @@ function scoreboard(en) {
 
         for(let i = 0; i < gameScenes.length; i++) {
             scoreboardTextElement.innerHTML += (`<b>${gameScenes[i].title}</b><br />`);
-            scoreboardTextElement.innerHTML += (`Enemies killed: ${getScoreManager().storage[i].killed}<br />`);
-            scoreboardTextElement.innerHTML += (`Shots fired: ${getScoreManager().storage[i].fired}<br />`);
-            scoreboardTextElement.innerHTML += (`Time: ${getScoreManager().getTimeString(getScoreManager().storage[i].time)}<br />`);
-            scoreboardTextElement.innerHTML += (`Score: ${getScoreManager().storage[i].total}<br /><br />`);
+            scoreboardTextElement.innerHTML += (`Enemies killed: ${getStatisticsManager().storage[i].killed}<br />`);
+            scoreboardTextElement.innerHTML += (`Shots fired: ${getStatisticsManager().storage[i].fired}<br />`);
+            scoreboardTextElement.innerHTML += (`Time: ${getStatisticsManager().getTimeString(getStatisticsManager().storage[i].time)}<br />`);
+            scoreboardTextElement.innerHTML += (`Score: ${getStatisticsManager().storage[i].total}<br /><br />`);
         }
 
     } else {

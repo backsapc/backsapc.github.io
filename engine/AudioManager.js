@@ -1,4 +1,4 @@
-class audioManager {
+class AudioManager {
     constructor() {
         this.clips = {};
         this.context = null;

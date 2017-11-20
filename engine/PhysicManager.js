@@ -1,4 +1,4 @@
-class physicManager {
+class PhysicsManager {
     constructor() {
 
     }
@@ -6,21 +6,12 @@ class physicManager {
     update(obj) {
         if(obj.moveX === 0 && obj.moveY === 0 && obj.angle === null)
             return 'stop';
-        let newX, newY;
-        if(obj.angle === null) {
-            newX = obj.posX + Math.floor(obj.moveX * obj.speed);
-            newY = obj.posY + Math.floor(obj.moveY * obj.speed);
-        } else {
-            newX = obj.posX + Math.cos(obj.angle) * obj.speed;
-            newY = obj.posY + Math.sin(obj.angle) * obj.speed;
-        }
+        let {newX, newY} = this.copmuteNewCoordinates(obj);
         let {newCenterX, newCenterY} = this.updateCenter(newX, obj, newY);
         let {ts, tsX, tsY} = this.getNewPositionTilesets(newCenterX, newCenterY, obj);
         let entity = this.entityAtXY(obj, newX, newY);
-
-        if(entity !== null && obj.onTouchEntity) {
+        if(entity !== null && obj.onTouchEntity)
             obj.onTouchEntity(entity);
-        }
 
         if(entity !== null && obj.name.includes('enemy')
             && (entity.name.includes('enemy') || entity.name.includes('player')))
@@ -29,19 +20,37 @@ class physicManager {
         if(!this.walkable(ts) && obj.onTouchMap)
             obj.onTouchMap(ts);
 
-        if(this.walkable(ts)/* && e === null*/) {
+        if(this.walkable(ts)) {
             obj.posX = newX;
             obj.posY = newY;
-        } else if(this.walkable(tsX)) {
-            obj.posX = newX;
-        } else if(this.walkable(tsY)) {
-            obj.posY = newY;
-        } else {
-            return 'break';
+            return 'move';
         }
 
+        if(this.walkable(tsX)) {
+            obj.posX = newX;
+            return 'move'
+        }
 
-        return 'move';
+        if(this.walkable(tsY)) {
+            obj.posY = newY;
+            return 'move';
+        }
+
+        return 'break';
+    }
+
+    copmuteNewCoordinates(obj) {
+        let newX, newY;
+
+        if (obj.angle === null) {
+            newX = obj.posX + Math.floor(obj.moveX * obj.speed);
+            newY = obj.posY + Math.floor(obj.moveY * obj.speed);
+            return {newX, newY};
+        }
+
+        newX = obj.posX + Math.cos(obj.angle) * obj.speed;
+        newY = obj.posY + Math.sin(obj.angle) * obj.speed;
+        return {newX, newY};
     }
 
     getNewPositionTilesets(newCenterX, newCenterY, obj) {
@@ -63,12 +72,10 @@ class physicManager {
 
     walkable(idx) {
         let blocks = gameScenes[0].walkable;
-
         for(let block of blocks) {
             if( idx === block )
                 return true;
         }
-
         return false;
     }
 

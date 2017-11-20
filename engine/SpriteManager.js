@@ -1,7 +1,7 @@
-class spriteManager {
+class SpriteManager {
     constructor() {
         this.image = new Image();
-        this.sprites = new Array();
+        this.sprites = [];
         this.imageLoaded = false;
         this.jsonLoaded = false;
     }
@@ -19,7 +19,6 @@ class spriteManager {
         request.send();
 
         console.log(`Loading atlas ${atlasJson}`);
-
         this.loadImg(atlasImage);
     }
 
@@ -35,18 +34,17 @@ class spriteManager {
 
     parseAtlas(atlasJson) {
         let atlas = JSON.parse(atlasJson);
-
-        for(let fr of atlas.frames) {
-            this.sprites.push({
-                name: fr.filename,
-                x: fr.frame.x,
-                y: fr.frame.y,
-                w: fr.frame.w,
-                h: fr.frame.h
-            });
-        }
-
+        for(let frame of atlas.frames)
+            this.sprites.push(this.createSpriteStruct(frame));
         this.jsonLoaded = true;
+    }
+
+    createSpriteStruct(frame) {
+        return {
+            name: frame.filename,
+            x: frame.frame.x, y: frame.frame.y,
+            w: frame.frame.w, h: frame.frame.h
+        };
     }
 
     drawSprite(ctx, name, x, y, angle = 0) {
@@ -58,15 +56,18 @@ class spriteManager {
             return;
         x -= getMapManager().camera.x;
         y -= getMapManager().camera.y;
-        if(angle !== 0) {
-            ctx.translate( x + sprite.w / 2, y + sprite.h / 2 );
-            ctx.rotate( angle );
-            this.drawSpriteImage(ctx, sprite, -sprite.w / 2, -sprite.h / 2);
-            ctx.rotate( -angle );
-            ctx.translate( -x - sprite.w / 2, -y - sprite.h / 2 );
+
+        if(angle === 0){
+            this.drawSpriteImage(ctx, sprite, x, y);
             return;
         }
-        this.drawSpriteImage(ctx, sprite, x, y);
+
+        ctx.translate( x + sprite.w / 2, y + sprite.h / 2 );
+        ctx.rotate( angle );
+        this.drawSpriteImage(ctx, sprite, -sprite.w / 2, -sprite.h / 2);
+        ctx.rotate( -angle );
+        ctx.translate( -x - sprite.w / 2, -y - sprite.h / 2 );
+
     }
 
     drawSpriteImage(ctx, sprite, x, y){

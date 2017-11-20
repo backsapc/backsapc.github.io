@@ -1,12 +1,9 @@
-class scoreManager {
+class StatisticsManager {
     constructor() {
-
         this.storage = [];
         this.clearAll();
         this.load();
-
         this.tempTimer = 0;
-
         this.pauseTimer = 0;
     }
 
@@ -148,12 +145,12 @@ class scoreManager {
     }
 
     clearSaves() {
-        if(storageAvailable('localStorage')) {
-            localStorage.removeItem('score_data');
-            localStorage.removeItem('current_level');
-        } else {
+        if(!storageAvailable('localStorage')) {
             console.log(`Local storage is unsupported!`);
+            return;
         }
+        localStorage.removeItem('score_data');
+        localStorage.removeItem('current_level');
     }
 
 

@@ -1,4 +1,4 @@
-class mapManager {
+class MapManager {
 
     constructor() {
         this.mapData = null;
@@ -157,10 +157,9 @@ class mapManager {
                         }
 
                         if(obj === null) continue;
-
                         obj.name = entity.name + entity.id;
                         obj.posX = entity.x;
-                        obj.posY = entity.y - entity.height; // КОСТЫЛЬ!!!
+                        obj.posY = entity.y - entity.height;
                         obj.sizeX = entity.width;
                         obj.sizeY = entity.height;
 
@@ -182,8 +181,6 @@ class mapManager {
     centerAt(x, y) {
         this.camera.x = this.getCenterCoordinate(this.camera.w, x, this.mapSize.x);
         this.camera.y = this.getCenterCoordinate(this.camera.h, y, this.mapSize.y);
-
-        //console.log(`Center at (${x}, ${y})`);
     }
 
     getCenterCoordinate(size, dimension, mapDimension){

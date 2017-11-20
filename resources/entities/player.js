@@ -50,13 +50,13 @@ class Player extends Entity {
             }
             console.log('Completed the level!');
             this.scoreLevel();
-            return;
+
         }
     }
 
     scoreLevel() {
-        getScoreManager().recordTime();
-        getScoreManager().calculateTotal();
+        getStatisticsManager().recordTime();
+        getStatisticsManager().calculateTotal();
         getGameManager().levelCompleted();
     }
 
@@ -80,7 +80,7 @@ class Player extends Entity {
 
             getGameManager().entities.push(bullet);
             getAudioManager().play('resources/sounds/shoot-sound.mp3');
-         //   getScoreManager().shotFired();
+         //   getStatisticsManager().shotFired();
             player.canFire = false;
             setTimeout(() => { getGameManager().player.canFire = true; }, bullet.delay);
         }

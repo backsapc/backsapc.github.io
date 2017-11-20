@@ -1,4 +1,4 @@
-class gameManager {
+class GameManager {
     constructor() {
         this.factory = {};
         this.entities = [];
@@ -47,6 +47,7 @@ class gameManager {
                 this.draw(getCurrentContext());
                 return;
             }
+
             this.ordinaryUpdate();
             this.acceptKills();
             this.draw(getCurrentContext());
@@ -80,13 +81,13 @@ class gameManager {
     togglePause() {
         if(this.pause) {
             console.log(`UNPAUSE`);
-            getScoreManager().timerUnpause();
+            getStatisticsManager().timerUnpause();
             getAudioManager().frequencyRamp(getAudioManager().defaultFrequency, 1);
             this.pause = false;
             return;
         }
         console.log(`PAUSE`);
-        getScoreManager().timerPause();
+        getStatisticsManager().timerPause();
         getAudioManager().frequencyRamp(getAudioManager().lowFrequency, 1);
         getGameManager().clearScreen();
         this.pause = true;
@@ -108,7 +109,7 @@ class gameManager {
             for(let entity of this.entities) {
                 entity.draw(getCurrentContext());
             }
-            getHudManager().drawGameHud();
+            getUIManager().drawGameHud();
         }
 
 
@@ -139,22 +140,23 @@ class gameManager {
 
     levelCompleted() {
         if(getEventsManager().action['fire']) {
-            completedLevel(getScoreManager().currentLevel);
-        } else {
-            getGameManager().stopScene();
-            getAudioManager().frequencyRamp(getAudioManager().lowFrequency, 1);
-            getHudManager().drawEndLevel();
-            setTimeout(getGameManager().levelCompleted, 20);
+            completedLevel(getStatisticsManager().currentLevel);
+            return;
         }
+
+        getGameManager().stopScene();
+        getAudioManager().frequencyRamp(getAudioManager().lowFrequency, 1);
+        getUIManager().drawEndLevel();
+        setTimeout(getGameManager().levelCompleted, 20);
 
     }
 
     reloadScene() {
         this.stopScene();
-        getScoreManager().clearCurrentRecording();
+        getStatisticsManager().clearCurrentRecording();
         getMapManager().parseMap(JSON.stringify(getMapManager().mapData));
         getMapManager().parseEntities();
-        getScoreManager().startTimer();
+        getStatisticsManager().startTimer();
         getGameManager().play();
     }
 
@@ -192,7 +194,7 @@ class gameManager {
 
     loadResources() {
         console.log(`Loading resources:`);
-        getHudManager().drawLoadingScreen();
+        getUIManager().drawLoadingScreen();
         getSpriteManager().loadAtlas("resources/images/spritesheet.png", "resources/images/sprites.json");
         getEventsManager().setup(getCurrentCanvas());
         getAudioManager().init();
@@ -206,32 +208,26 @@ class gameManager {
     }
 
     loadResourcesFinish() {
-        //console.log(`Loading resources:`);
         let jobs = 3;
         if(getSpriteManager().jsonLoaded) {
             jobs--;
-           // console.log(`[R]: Atlas JSON loaded`);
         }
         if(getSpriteManager().imageLoaded) {
             jobs--;
-            //console.log(`[R]: Atlas image loaded`);
         }
-         if(getAudioManager().loaded) {
+        if(getAudioManager().loaded) {
             jobs--;
-           // console.log(`[R]: Sounds loaded`);
         }
-
         if(jobs !== 0){
             setTimeout(getGameManager().loadResourcesFinish, 10);
             return;
         }
-
         console.log(`[R]: COMPLETE`);
         resourcesLoaded();
     }
 
     play() {
-        this.worldUpdateTimer = setInterval(updateWorld, gameSpeed);
+        this.worldUpdateTimer = setInterval(updateWorld, getGameSpeed());
     }
 
     stop() {

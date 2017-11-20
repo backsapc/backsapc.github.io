@@ -1,4 +1,4 @@
-class eventsManager {
+class EventsManager {
     constructor() {
         this.bind = [];
         this.action = [];
