@@ -11,6 +11,7 @@ var gameScenes = [
         hint: "Destroy your enemies. Time goes with your moves.",
         walkable: [21]
     },
+
     {
         sceneName: 'dark-time',
         title: 'Level 2: dark time is here',
@@ -20,7 +21,6 @@ var gameScenes = [
         "You have to leave the lab now, run!",
         map: 'dark-time.json',
         music: 'resources/sounds/game-music.mp3',
-        hero: 'hero-2',
         hint: 'Find energy for your gun. Escape the lab.',
         walkable: [21]
     },
@@ -32,7 +32,6 @@ var gameScenes = [
         "Here's no time to complain. We can't allow them to destroy us.",
         map: 'weak.json',
         music: 'resources/sounds/game-music.mp3',
-        hero: 'hero-3',
         hint: 'Kill your enemies. Do not die.',
         walkable: [21]
     },
@@ -44,7 +43,6 @@ var gameScenes = [
         "Destroy the lab. There're tens of enemies. Good luck!",
         map: 'final.json',
         music: 'resources/sounds/game-music.mp3',
-        hero: 'hero-4',
         hint: 'Destroy the lab.',
         walkable: [21]
     },

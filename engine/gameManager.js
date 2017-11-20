@@ -151,10 +151,10 @@ class gameManager {
 
     reloadScene() {
         this.stopScene();
-     //   getScoreManager().clearCurrentRecording();
+        getScoreManager().clearCurrentRecording();
         getMapManager().parseMap(JSON.stringify(getMapManager().mapData));
         getMapManager().parseEntities();
-     //   getScoreManager().startTimer();
+        getScoreManager().startTimer();
         getGameManager().play();
     }
 
@@ -207,28 +207,27 @@ class gameManager {
 
     loadResourcesFinish() {
         //console.log(`Loading resources:`);
-         let jobs = 2;
-
-        if( getSpriteManager().jsonLoaded ) {
+         let jobs = 3;
+        if(getSpriteManager().jsonLoaded) {
             jobs--;
            // console.log(`[R]: Atlas JSON loaded`);
         }
-
-        if( getSpriteManager().imageLoaded ) {
+        if(getSpriteManager().imageLoaded) {
             jobs--;
             //console.log(`[R]: Atlas image loaded`);
         }
-         if( getAudioManager().loaded ) {
+         if(getAudioManager().loaded) {
             jobs--;
            // console.log(`[R]: Sounds loaded`);
         }
-        if( jobs === 0 ) {
-            console.log(`[R]: COMPLETE`);
-            resourcesLoaded();
-        } else {
+
+        if(jobs !== 0){
             setTimeout(getGameManager().loadResourcesFinish, 10);
+            return;
         }
 
+        console.log(`[R]: COMPLETE`);
+        resourcesLoaded();
     }
 
     play() {
