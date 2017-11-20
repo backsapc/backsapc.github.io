@@ -1,0 +1,8 @@
+.w3-allerta {
+    font-family: 'Allerta Stencil', serif;
+}
+
+@font-face {
+    font-family: 'AllertaStencil';
+    src: url('resources/allerta_stencil.ttf');
+}

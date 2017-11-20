@@ -105,7 +105,7 @@ class Enemy extends Entity {
 
             getGameManager().entities.push(bullet);
 
-//            getAudioManager().playWorldSound('res/sounds/shot.mp3', this.posX, this.posY);
+            getAudioManager().playWorldSound('resources/sounds/shoot-sound.mp3', this.posX, this.posY);
 
             this.canFire = false;
             setTimeout( () => {
@@ -118,6 +118,7 @@ class Enemy extends Entity {
 
     kill() {
         this.alive = false;
+        getAudioManager().play('resources/sounds/sad-death.mp3');
         let energy = new Energy();
         energy.name = 'energy' + (++getGameManager().fireNum);
         energy.sizeX = 25;

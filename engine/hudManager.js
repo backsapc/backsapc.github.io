@@ -25,7 +25,7 @@ class hudManager {
         context.textAlign = "left";
         ctx.fillStyle = 'white';
         ctx.fillText(playerAmmo, ammoPos.x + delta, ammoPos.y + hudAmmoImage.h / 4);
-        
+
         // Drawing score
         ctx.font = '30px arcade-classic';
         ctx.textBaseline = "top";
@@ -51,7 +51,9 @@ class hudManager {
     }
 
     drawTitleText(text) {
-        getCurrentContext().fillStyle = 'white';
+        let ctx = getCurrentContext();
+        ctx.fillStyle = 'white';
+        ctx.font = 'AllertaStencil';
         this.drawText(text, 30, getCurrentCanvas().width / 2, getCurrentCanvas().height / 2, 'bottom');
     }
 
@@ -82,7 +84,6 @@ class hudManager {
         getGameManager().clearScreen();
         this.drawTitleText(`Loading`);
         this.drawSubtitleText(`Please  wait`);
-        this.drawLevelHint(`Your  progress  will  be  saved  automatically`);
     }
 
     drawLevelHint(hint) {

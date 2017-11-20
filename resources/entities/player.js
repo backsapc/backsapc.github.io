@@ -29,7 +29,7 @@ class Player extends Entity {
                 this.ammo += entity.energyAmount;
                 entity.energyAmount = 0;
                 entity.kill();
-               // getAudioManager().play('res/sounds/pickup.mp3');
+                getAudioManager().play('resources/sounds/energy-onboard.mp3');
             }
             return;
         }
@@ -63,7 +63,7 @@ class Player extends Entity {
     }
 
     kill() {
-
+        getAudioManager().play('resources/sounds/sad-death.mp3');
     }
 
     fire() {
@@ -81,10 +81,8 @@ class Player extends Entity {
             bullet.posY = this.posY + (this.sizeY / 2 + 4) * Math.sin(angle);// * 16;
 
             getGameManager().entities.push(bullet);
-/*
-            getAudioManager().play('res/sounds/shot.mp3');
-            getScoreManager().shotFired();
-*/
+            getAudioManager().play('resources/sounds/shoot-sound.mp3');
+         //   getScoreManager().shotFired();
             player.canFire = false;
             setTimeout(() => { getGameManager().player.canFire = true; }, bullet.delay);
         }

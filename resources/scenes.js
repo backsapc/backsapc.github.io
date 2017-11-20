@@ -1,10 +1,12 @@
 var gameScenes = [
     {
-        sceneName: 'the-running-man',
-        title: 'PART  I:  THE  RUNNING  MAN',
-        subtitle: 'Almost  ten  years  after  my \nretirement  they  found  me.',
+        sceneName: 'the-beginning',
+        title: 'Level 1: get skills up',
+        subtitle: "You know, time's relative... But...\n" +
+        "Does we have right to control it?... Don't think so..\n" +
+        "You have to leave lab know, run!",
         map: 'fight.json',
-        music: 'res/sounds/timecop-loop.mp3',
+        music: 'resources/sounds/game-music.mp3',
         hero: 'hero-1',
         hint: 'ESCAPE THE CLUB',
         walkable: [21]

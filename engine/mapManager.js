@@ -9,7 +9,7 @@ class mapManager {
         this.scale = 1;
         this.mapSize = {x: 32, y: 32};
         this.tilesets = [];
-        this.camera = {x: 0, y: 0, w: 900, h: 768};
+        this.camera = {x: 0, y: 0, w: 900, h: 640};
         this.imagesLoadCounter = 0;
         this.imagesLoaded = false;
         this.jsonLoaded = false;

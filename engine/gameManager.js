@@ -6,7 +6,7 @@ class gameManager {
         this.player = null;
         this.laterKill = [];
         this.worldUpdateTimer = null;
-        // this.pause = false;
+        this.pause = false;
     }
 
     initPlayer(obj) {
@@ -27,7 +27,7 @@ class gameManager {
             getEventsManager().action['pause'] = false;
         }
 
-        // if(!this.pause) {
+        if(!this.pause) {
             this.player.moveX = 0;
             this.player.moveY = 0;
             if(getEventsManager().action['up']) this.player.moveY = -1;
@@ -50,7 +50,7 @@ class gameManager {
             this.ordinaryUpdate();
             this.acceptKills();
             this.draw(getCurrentContext());
-        // }
+        }
 
     }
 
@@ -121,7 +121,7 @@ class gameManager {
         getMapManager().jsonLoaded = false;
         getMapManager().imagesLoaded = false;
         getMapManager().imagesLoadCounter = 0;
-        getMapManager().camera = {x: 0, y: 0, w: 900, h: 768};
+        getMapManager().camera = {x: 0, y: 0, w: 900, h: 640};
         getMapManager().loadMap('resources/maps/' + sc.map);
         console.log(`Loading scene "${sc.sceneName}"`);
         setTimeout(this.loadSceneFinish, 10);
@@ -145,9 +145,8 @@ class gameManager {
             completedLevel(getScoreManager().currentLevel);
         } else {
             getGameManager().stopScene();
-            // getAudioManager().frequencyRamp(getAudioManager().lowFrequency, 1);
-            // getHudManager().drawHero('endlevel');
-            // getHudManager().drawEndLevel();
+            getAudioManager().frequencyRamp(getAudioManager().lowFrequency, 1);
+            getHudManager().drawEndLevel();
             setTimeout(getGameManager().levelCompleted, 20);
         }
 
@@ -155,12 +154,10 @@ class gameManager {
 
     reloadScene() {
         this.stopScene();
-        // getScoreManager().clearCurrentRecording();
-
+     //   getScoreManager().clearCurrentRecording();
         getMapManager().parseMap(JSON.stringify(getMapManager().mapData));
         getMapManager().parseEntities();
-
-        // getScoreManager().startTimer();
+     //   getScoreManager().startTimer();
         getGameManager().play();
     }
 
@@ -169,80 +166,45 @@ class gameManager {
         let scaleY = getCurrentCanvas().getBoundingClientRect().height / getCurrentCanvas().offsetHeight;
 
         let x = getCurrentCanvas().getBoundingClientRect().left +
-            (getGameManager().player.posX + Math.floor(getGameManager().player.sizeX / 2.0) - getMapManager().camera.x) * scaleX;
+            (getGameManager().player.posX + Math.floor(getGameManager().player.sizeX / 2.0)
+             - getMapManager().camera.x) * scaleX;
         let y = getCurrentCanvas().getBoundingClientRect().top +
-            (getGameManager().player.posY + Math.floor(getGameManager().player.sizeY / 2.0) - getMapManager().camera.y) * scaleY;
-
+            (getGameManager().player.posY + Math.floor(getGameManager().player.sizeY / 2.0) 
+            - getMapManager().camera.y) * scaleY;
         return { x, y };
     }
 
     loadSceneFinish(sc) {
-        //console.log(`Loading scene:`);
         let jobs = 2;
-
         if( getMapManager().jsonLoaded ) {
             jobs--;
             console.log(`[S]: Map JSON loaded`);
         }
-
         if( getMapManager().imagesLoaded ) {
             jobs--;
             console.log(`[S]: Map images loaded`);
         }
-
         if( jobs === 0 ) {
             console.log(`[S]: COMPLETE`);
-
-            // Launching
             getGameManager().reloadScene();
-        } else {
-            setTimeout(getGameManager().loadSceneFinish, 50);
+            return;
         }
+
+        setTimeout(getGameManager().loadSceneFinish, 50);
     }
 
     loadResources() {
-        console.log(`Loading resources:`);/*
+        console.log(`Loading resources:`);
         getHudManager().drawLoadingScreen();
-*/
         getSpriteManager().loadAtlas("resources/images/spritesheet.png", "resources/images/sprites.json");
         getEventsManager().setup(getCurrentCanvas());
-/*
         getAudioManager().init();
         getAudioManager().loadArray([
-            'res/sounds/timecop-loop.mp3',
-            'res/sounds/pacemaker-loop.mp3',
-            'res/sounds/scorpions-loop.mp3',
-            'res/sounds/hardwired-loop.mp3',
-            'res/sounds/squad-loop.mp3',
-            'res/sounds/stalker.mp3',
-            /*'res/sounds/riot-loop.mp3',*/
-/*
-            'res/sounds/death.mp3',
-            'res/sounds/death2.mp3',
-            'res/sounds/death3.mp3',
-            'res/sounds/death4.mp3',
-            'res/sounds/death5.mp3',
-
-            'res/sounds/death-01.mp3',
-            'res/sounds/death-02.mp3',
-            'res/sounds/death-03.mp3',
-            'res/sounds/death-04.mp3',
-            'res/sounds/death-05.mp3',
-            'res/sounds/death-06.mp3',
-            'res/sounds/death-07.mp3',
-            'res/sounds/death-08.mp3',
-
-            'res/sounds/pickup.mp3',
-            'res/sounds/miss.mp3',
-            'res/sounds/miss2.mp3',
-            'res/sounds/miss3.mp3',
-            'res/sounds/miss4.mp3',
-            'res/sounds/miss5.mp3',
-            'res/sounds/miss6.mp3',
-            'res/sounds/miss7.mp3',
-            'res/sounds/shot.mp3'
+            'resources/sounds/game-music.mp3',
+            'resources/sounds/shoot-sound.mp3',
+            'resources/sounds/sad-death.mp3',
+            'resources/sounds/energy-onboard.mp3',
         ]);
-*/
         setTimeout(this.loadResourcesFinish, 10);
     }
 
@@ -252,18 +214,17 @@ class gameManager {
 
         if( getSpriteManager().jsonLoaded ) {
             jobs--;
-            //console.log(`[R]: Atlas JSON loaded`);
+           // console.log(`[R]: Atlas JSON loaded`);
         }
 
         if( getSpriteManager().imageLoaded ) {
             jobs--;
             //console.log(`[R]: Atlas image loaded`);
         }
-        /* if( getAudioManager().loaded ) {
+         if( getAudioManager().loaded ) {
             jobs--;
-            //console.log(`[R]: Sounds loaded`);
+           // console.log(`[R]: Sounds loaded`);
         }
-        */
         if( jobs === 0 ) {
             console.log(`[R]: COMPLETE`);
             resourcesLoaded();
