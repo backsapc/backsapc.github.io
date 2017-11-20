@@ -2,57 +2,50 @@ var gameScenes = [
     {
         sceneName: 'the-beginning',
         title: 'Level 1: get skills up',
-        subtitle: "You know, time's relative... But...\n" +
-        "Does we have right to control it?... Don't think so..\n" +
-        "You have to leave lab know, run!",
+        subtitle: "So, hello, I'm James. You're here to participate\n" +
+        "in the Great Experiment.\n" +
+        "Test your skills, you can control time now.\n",
         map: 'fight.json',
         music: 'resources/sounds/game-music.mp3',
         hero: 'hero-1',
-        hint: 'ESCAPE THE CLUB',
+        hint: "Destroy your enemies. Time goes with your moves.",
+        walkable: [21]
+    },
+    {
+        sceneName: 'dark-time',
+        title: 'Level 2: dark time is here',
+        subtitle: "Now you know as no one, time's relative... But...\n" +
+        "Does we have right to control it?... Don't think so..\n" +
+        "Here's gun for you, but I don't have energy for it.\n" +
+        "You have to leave the lab now, run!",
+        map: 'bloodshedin.json',
+        music: 'resources/sounds/game-music.mp3',
+        hero: 'hero-2',
+        hint: 'Find energy for your gun. Escape the lab.',
         walkable: [21]
     },
 
     {
-        sceneName: 'bloodshedin',
-        title: 'PART  II:  BLOODSHEDIN\'',
-        subtitle: 'They  killed  Charles.  He  was  my  best  friend.  \nIt  doesn\'t  matter  that  he  was  a  cat. \nBig  Ronald\'s  gotta  pay  for  this.',
-        map: 'bloodshedin.json',
-        music: 'res/sounds/pacemaker-loop.mp3',
-        hero: 'hero-2',
-        hint: 'ESCAPE THE BUILDING',
-        walkable: [11, 13, 15, 21, 41, 43, 45, 47, 49, 53]
-    },
-
-    {
-        sceneName: 'ambush',
-        title: 'PART  III:  AMBUSH',
-        subtitle: 'Everything  goes  wrong...',
+        sceneName: 'weak',
+        title: 'Level 3: pull yourself together!',
+        subtitle: "Good! If you are reading this, then you must be tired, but alive.\n" +
+        "Here's no time to complain. We can't allow them to destroy us.",
         map: 'ambush.json',
-        music: 'res/sounds/scorpions-loop.mp3',
+        music: 'resources/sounds/game-music.mp3',
         hero: 'hero-3',
-        hint: 'ESCAPE THE BUILDING',
-        walkable: [11, 13, 15, 21, 41, 43, 45, 47, 49, 53]
+        hint: 'Kill your enemies. Do not die.',
+        walkable: [21]
     },
 
     {
-        sceneName: 'dejavu',
-        title: 'PART  IV:  DEJA  VU',
-        subtitle: 'I  remember  I\'ve  been  here  before...',
-        map: 'dejavu.json',
-        music: 'res/sounds/hardwired-loop.mp3',
+        sceneName: 'final',
+        title: 'Level 4: final',
+        subtitle: "It's time for the attack.. They aren't ready for you.\n Save world from thing I've created.\n" +
+        "Destroy the lab. There're tens of them. Good luck!",
+        map: 'final.json',
+        music: 'resources/sounds/game-music.mp3',
         hero: 'hero-4',
-        hint: 'ESCAPE THE CLUB',
-        walkable: [11, 13, 15, 21, 41, 43, 45, 47, 49, 53]
+        hint: 'Destroy the lab.',
+        walkable: [21]
     },
-
-    {
-        sceneName: 'finale',
-        title: 'PART  V:  FINALE',
-        subtitle: 'Hello,  Big  Ronald!',
-        map: 'finale.json',
-        music: 'res/sounds/squad-loop.mp3',
-        hero: 'hero-5',
-        hint: 'KILL EVERYONE AND LEAVE',
-        walkable: [11, 13, 15, 21, 41, 43, 45, 47, 49, 53]
-    }
 ];

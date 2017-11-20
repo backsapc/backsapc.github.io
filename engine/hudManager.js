@@ -20,23 +20,23 @@ class hudManager {
             hudAmmoImage.h
         );
         let delta = hudAmmoImage.w + 5;
-        ctx.font = '30px arcade-classic';
+        ctx.font = '30px AllertaStencil';
         ctx.textBaseline = "top";
         context.textAlign = "left";
         ctx.fillStyle = 'white';
         ctx.fillText(playerAmmo, ammoPos.x + delta, ammoPos.y + hudAmmoImage.h / 4);
 
         // Drawing score
-        ctx.font = '30px arcade-classic';
+        ctx.font = '30px AllertaStencil';
         ctx.textBaseline = "top";
         context.textAlign = "left";
         ctx.fillStyle = 'white';
-        ctx.fillText(getScoreManager().currentScore(), 20, 20);
+       // ctx.fillText(getScoreManager().currentScore(), 20, 20);
     }
 
     drawText(text, size, x, y, baseline) {
         let ctx = getCurrentContext();
-        ctx.font = `${size}px arcade-classic`;
+        ctx.font = `${size}px AllertaStencil`;
         ctx.textBaseline = baseline;
         context.textAlign = 'center';
         //ctx.fillStyle = 'white';
@@ -53,7 +53,6 @@ class hudManager {
     drawTitleText(text) {
         let ctx = getCurrentContext();
         ctx.fillStyle = 'white';
-        ctx.font = 'AllertaStencil';
         this.drawText(text, 30, getCurrentCanvas().width / 2, getCurrentCanvas().height / 2, 'bottom');
     }
 

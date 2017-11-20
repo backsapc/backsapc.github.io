@@ -54,9 +54,7 @@ function resourcesLoaded() {
 
     // Loading start level
     setTimeout(() => { startLevel(0) }, 100);
-
     console.log('loaded all');
-    //getHudManager().drawHero('endlevel');
 }
 
 function loadAll() {
