@@ -2,38 +2,18 @@
 <html lang="en" prefix="og: http://ogp.me/ns#">
 <head>
     <meta charset="UTF-8">
-    <title>KITSCH</title>
+    <title>SUPER COLD</title>
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-    <!--   <link rel="stylesheet" href="app.css">
-
-       <meta property="og:image" content="res/images/kitsch-logo-mid.png">
-       <meta property="og:description" content="This classic, hardcore arcade game sends you back to the 80s and gives you a nice warm feeling of hatred.">
-       <meta property="og:title" content="KITSCH: Always shoot first">
-   -->
 </head>
 <body>
-
-<div id="wrapper" class="w3-center w3-padding" style="margin: 0 auto;">
-    <canvas id="canvas" width="900px" height="768px">
-        Your browser does not support CANVAS
-    </canvas>
-</div>
-
+    <div id="wrapper" class="w3-center w3-padding" style="margin: 0 auto; display: block;">
+        <canvas id="canvas" width="900px" height="768px">
+            Your browser does not support CANVAS
+        </canvas>
+    </div>
 <script>
     let canvas = document.getElementById('canvas');
     let context = canvas.getContext('2d');
-
-    canvas.width = 900;// 640;  // 1.25
-    canvas.height = 640;// 480; // 1.25
-
-    context.moveTo(0, 0);
-    context.lineTo(canvas.width, canvas.height);
-    context.moveTo(canvas.width, 0);
-    context.lineTo(0, canvas.height);
-
-    context.strokeStyle = 'black';
-    context.lineWidth = 5;
-    context.stroke();
 </script>
 <script src="engine/mapManager.js"></script>
 <script src="engine/spriteManager.js"></script>
@@ -57,3 +37,4 @@
 <script src="app.js"></script>
 </body>
 </html>
+
