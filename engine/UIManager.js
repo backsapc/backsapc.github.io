@@ -79,25 +79,4 @@ class UIManager {
         this.drawTitleText(`Loading`);
         this.drawSubtitleText(`Please  wait`);
     }
-
-    drawLevelHint(hint) {
-        getCurrentContext().fillStyle = '#004a8f';
-        this.drawText(hint, 18, getCurrentCanvas().width / 2, getCurrentCanvas().height - 30, 'bottom');
-    }
-
-    drawHero(spritename) {
-        let sprite = getSpriteManager().getSprite(spritename);
-        getCurrentContext().drawImage(getSpriteManager().image,
-            sprite.x,
-            sprite.y,
-            sprite.w,
-            sprite.h,
-            getCurrentCanvas().width / 2 - 150,
-            getCurrentCanvas().height / 2 - 120,
-            300,
-            85
-        );
-    }
-
-
 }
