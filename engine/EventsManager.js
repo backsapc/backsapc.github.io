@@ -19,8 +19,6 @@ class EventsManager {
         window.addEventListener('mousemove', this.onMouseMove);
         window.addEventListener('keydown', this.onKeyDown);
         window.addEventListener('keyup', this.onKeyUp);
-        // document.body.addEventListener('keydown', this.onKeyDown);
-        // document.body.addEventListener('keyup', this.onKeyUp);
     }
 
     getMouseDelta() {

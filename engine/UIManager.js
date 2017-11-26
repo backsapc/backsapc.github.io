@@ -67,10 +67,8 @@ class UIManager {
             `Enemies  killed:  ${getStatisticsManager().currentKills()}\n
             Time:  ${getStatisticsManager().getTimeString(getStatisticsManager().getCurrentTime())}\n
             Score:  ${getStatisticsManager().currentScore()}\n
-            \n---------------------------\n
             Total  score:  ${getStatisticsManager().getCurrentTotalScore()}`
         );
-        //this.drawSubtitleText('Press mouse key to continue');
         this.drawPressFireText();
     }
 
