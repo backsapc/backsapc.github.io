@@ -1,6 +1,8 @@
 class StatisticsManager {
+
     constructor() {
         this.storage = [];
+        this.records = [];
         this.clearAll();
         this.load();
         this.tempTimer = 0;
@@ -10,7 +12,6 @@ class StatisticsManager {
     clearCurrentRecording() {
         this.storage[this.currentLevel].score = 0;
         this.storage[this.currentLevel].killed = 0;
-        this.storage[this.currentLevel].fired = 0;
         this.storage[this.currentLevel].time = 0;
         this.storage[this.currentLevel].total = 0;
     }
@@ -18,20 +19,10 @@ class StatisticsManager {
     enemyKilled(hardness) {
         this.storage[this.currentLevel].score += Math.floor(200 * hardness);
         this.storage[this.currentLevel].killed++;
-        //console.log(`Enemy Killed (${this.currentKills()})`);
-    }
-
-    shotFired() {
-        this.storage[this.currentLevel].fired++;
-        //console.log(`Shot fired (${this.currentShots()})`);
     }
 
     currentScore() {
         return this.storage[this.currentLevel].score;
-    }
-
-    currentShots() {
-        return this.storage[this.currentLevel].fired;
     }
 
     currentKills() {
@@ -47,8 +38,7 @@ class StatisticsManager {
     }
 
     timerUnpause() {
-        let pause = Date.now() - this.pauseTimer;
-        this.tempTimer += pause;
+        this.tempTimer += Date.now() - this.pauseTimer;
         this.pauseTimer = 0;
     }
 
@@ -64,20 +54,18 @@ class StatisticsManager {
         return Date.now() - this.tempTimer;
     }
 
-    calculateTotal() {
-        this.storage[this.currentLevel].total = this.storage[this.currentLevel].score + this.getCurrentAmmoBonus() + this.getCurrentTimeBonus();
+    calculateTotal(energyAmount) {
+        this.storage[this.currentLevel].total = this.storage[this.currentLevel].score +
+            this.getCurrentEnergyBonus(energyAmount) +
+            this.getCurrentTimeBonus();
     }
 
     getCurrentTotalScore() {
         return this.storage[this.currentLevel].total;
     }
 
-    getCurrentAmmoBonus() {
-        if(this.currentKills() > this.currentShots()) {
-            return 0;
-        }
-
-        return  Math.floor(500 / (this.currentShots() / (this.currentKills()*1.0)));
+    getCurrentEnergyBonus(energyAmount) {
+        return energyAmount * 100;
     }
 
     getCurrentTimeBonus() {
@@ -86,12 +74,11 @@ class StatisticsManager {
 
     clearAll() {
         this.storage = [];
-
+        this.records = [];
         for(let i = 0; i < gameScenes.length; i++) {
             this.storage[i] = {};
             this.storage[i].score = 0;
             this.storage[i].killed = 0;
-            this.storage[i].fired = 0;
             this.storage[i].time = 0;
             this.storage[i].total = 0;
         }
@@ -103,6 +90,7 @@ class StatisticsManager {
         if(storageAvailable('localStorage')) {
             console.log(`Saving!`);
             localStorage.setItem('score_data', JSON.stringify(this.storage));
+            localStorage.setItem('records', JSON.stringify(this.records));
             localStorage.setItem('current_level', this.currentLevel);
         } else {
             console.log(`Local storage is unsupported!`);
@@ -153,5 +141,11 @@ class StatisticsManager {
         localStorage.removeItem('current_level');
     }
 
+    calculateFinalGameScore(){
+        let totalGameScore = 0;
+        for(let storageItem of this.storage){
+            totalGameScore += storageItem.total;
+        }
 
+    }
 }

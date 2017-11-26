@@ -137,7 +137,7 @@ class MapManager {
                         switch(entity.type) {
                             case 'Player':
                                 obj = new Player();
-                                obj.ammo = entity.properties.ammo;
+                                obj.energyAmount = entity.properties.energyAmount;
                                 break;
 
                             case 'Enemy':

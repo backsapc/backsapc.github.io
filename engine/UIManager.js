@@ -5,7 +5,7 @@ class UIManager {
 
     drawGameHud() {
         let ctx = getCurrentContext();
-        let playerAmmo = getGameManager().player.ammo;
+        let playerAmmo = getGameManager().player.energyAmount;
         let hudAmmoImage = getSpriteManager().getSprite('energy1');
         let hudAmmoPadding = 20;
         let ammoPos = { x: hudAmmoPadding, y: getCurrentCanvas().height - hudAmmoPadding - hudAmmoImage.h };

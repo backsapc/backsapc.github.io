@@ -1,7 +1,7 @@
 class Player extends Entity {
     constructor() {
         super();
-        this.ammo = 6;
+        this.energyAmount = 6;
         this.speed = 5;
         this.canFire = true;
     }
@@ -26,7 +26,7 @@ class Player extends Entity {
     onTouchEntity(entity) {
         if(entity.name.includes('energy')) {
             if(entity.energyAmount !== 0) {
-                this.ammo += entity.energyAmount;
+                this.energyAmount += entity.energyAmount;
                 entity.energyAmount = 0;
                 entity.kill();
                 getAudioManager().play('resources/sounds/energy-onboard.mp3');
@@ -37,26 +37,13 @@ class Player extends Entity {
         if(entity.name.includes('trigger')) {
             console.log('Completed the level!');
             this.scoreLevel();
-            return;
-        }
-
-        if(entity.name.includes('trigger_killeveryone')) {
-            console.log('Leaving attempt!');
-            for(let entity of getGameManager().entities) {
-                if(entity.name.includes('enemy')) {
-                    console.log('There are more enemies around!');
-                    return;
-                }
-            }
-            console.log('Completed the level!');
-            this.scoreLevel();
 
         }
     }
 
     scoreLevel() {
         getStatisticsManager().recordTime();
-        getStatisticsManager().calculateTotal();
+        getStatisticsManager().calculateTotal(this.energyAmount);
         getGameManager().levelCompleted();
     }
 
@@ -66,8 +53,8 @@ class Player extends Entity {
 
     fire() {
         let player = getGameManager().player;
-        if(player.canFire && player.ammo !== 0) {
-            player.ammo--;
+        if(player.canFire && player.energyAmount !== 0) {
+            player.energyAmount--;
             let bullet = new Bullet();
             bullet.sizeX = 32;
             bullet.sizeY = 16;
@@ -80,7 +67,6 @@ class Player extends Entity {
 
             getGameManager().entities.push(bullet);
             getAudioManager().play('resources/sounds/shoot-sound.mp3');
-         //   getStatisticsManager().shotFired();
             player.canFire = false;
             setTimeout(() => { getGameManager().player.canFire = true; }, bullet.delay);
         }

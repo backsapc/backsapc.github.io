@@ -23,11 +23,11 @@
                  "name":"player",
                  "properties":
                     {
-                     "ammo":10
+                     "energyAmount":10
                     },
                  "propertytypes":
                     {
-                     "ammo":"int"
+                     "energyAmount":"int"
                     },
                  "rotation":0,
                  "type":"Player",

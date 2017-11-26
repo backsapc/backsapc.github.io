@@ -1,7 +1,7 @@
 class Enemy extends Entity {
     constructor() {
         super();
-        this.ammo = 0;
+        this.energyAmount = 0;
         this.alive = true;
         this.speed = 3;
         this.difficulty = 0.1;
