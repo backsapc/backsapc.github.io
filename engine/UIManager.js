@@ -65,9 +65,9 @@ class UIManager {
         this.drawTitleText('Great  job!');
         this.drawSubtitleText(
             `Enemies  killed:  ${getStatisticsManager().currentKills()}\n
-            Time:  ${getStatisticsManager().getTimeString(getStatisticsManager().getCurrentTime())}\n
-            Score:  ${getStatisticsManager().currentScore()}\n
-            Total  score:  ${getStatisticsManager().getCurrentTotalScore()}`
+             Time:  ${getStatisticsManager().getTimeString(getStatisticsManager().getCurrentTime())}\n
+             Score:  ${getStatisticsManager().currentScore()}\n
+             Total  score:  ${getStatisticsManager().getCurrentTotalScore()}`
         );
         this.drawPressFireText();
     }
