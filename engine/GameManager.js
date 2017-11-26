@@ -41,7 +41,7 @@ class GameManager {
             }
 
             if(this.player.moveX === 0 && this.player.moveY === 0) {
-                getAudioManager().frequencyRamp(getAudioManager().lowFrequency, 1);
+                getAudioManager().frequencyRamp(getAudioManager().lowFrequency, 0);
                 this.player.update();
                 this.lazyUpdate();
                 this.acceptKills();
@@ -49,7 +49,7 @@ class GameManager {
                 return;
             }
 
-            getAudioManager().frequencyRamp(getAudioManager().defaultFrequency, 1);
+            getAudioManager().frequencyRamp(getAudioManager().defaultFrequency, 0);
             this.ordinaryUpdate();
             this.acceptKills();
             this.draw(getCurrentContext());
