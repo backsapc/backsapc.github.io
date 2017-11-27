@@ -62,7 +62,7 @@ function startLevel(l) {
             if(totalScore < records[i])
                 continue;
             getStatisticsManager().shiftRecords(i);
-            records[i] = totalScore;
+            records[i].total = totalScore;
             let name = getNewHeroName();
             records[i].name = name;
             break;
