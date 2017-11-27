@@ -161,7 +161,7 @@ class StatisticsManager {
     }
 
     shiftRecords(recordNumber){
-        for(let i = this.records.length; i > recordNumber; i--){
+        for(let i = this.records.length - 1; i > recordNumber; i--){
             this.records[i] = this.records[i - 1];
         }
     }

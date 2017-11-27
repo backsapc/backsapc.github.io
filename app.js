@@ -71,6 +71,7 @@ function startLevel(l) {
         getGameManager().clearScreen();
         getUIManager().drawTitleText("You've done it, awesome!");
         getUIManager().drawSubtitleText(`Total score: ${totalScore}`);
+        setInterval(toMainMenu, 1000);
     }
 }
 
