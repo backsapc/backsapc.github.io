@@ -163,6 +163,7 @@ function scoreboard(en) {
 
 function clearRecords() {
     getStatisticsManager().clearAll();
+    getStatisticsManager().save();
     scoreboard(true);
 }
 
