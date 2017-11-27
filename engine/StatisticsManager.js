@@ -117,7 +117,7 @@ class StatisticsManager {
                 console.log(`Found saves!`);
                 this.storage = JSON.parse(scoreData);
                 this.currentLevel = currentLevel * 1;
-                this.records = records;
+                this.records = JSON.parse(records);
             } else {
                 console.log(`Saves not found!`);
             }
