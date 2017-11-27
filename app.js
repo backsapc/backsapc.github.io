@@ -62,16 +62,17 @@ function startLevel(l) {
             if(totalScore < records[i])
                 continue;
             getStatisticsManager().shiftRecords(i);
+            records[i] = {};
             records[i].total = totalScore;
-            let name = getNewHeroName();
-            records[i].name = name;
+            records[i].name = getNewHeroName();
             break;
         }
         getStatisticsManager().save();
         getGameManager().clearScreen();
         getUIManager().drawTitleText("You've done it, awesome!");
         getUIManager().drawSubtitleText(`Total score: ${totalScore}`);
-        setInterval(toMainMenu, 1000);
+        switchInnerMenu();
+        setTimeout(toMainMenu, 1000);
     }
 }
 
