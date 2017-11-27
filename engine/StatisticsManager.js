@@ -3,6 +3,11 @@ class StatisticsManager {
     constructor() {
         this.storage = [];
         this.records = [];
+        for(let i = 0; i < 5; i++) {
+            this.records[i] = {};
+            this.records[i].name = '';
+            this.records[i].total = 0;
+        }
         this.clearAll();
         this.load();
         this.tempTimer = 0;
@@ -75,6 +80,11 @@ class StatisticsManager {
     clearAll() {
         this.storage = [];
         this.records = [];
+        for(let i = 0; i < 5; i++) {
+            this.records[i] = {};
+            this.records[i].name = '';
+            this.records[i].total = 0;
+        }
         for(let i = 0; i < gameScenes.length; i++) {
             this.storage[i] = {};
             this.storage[i].score = 0;
@@ -102,11 +112,12 @@ class StatisticsManager {
             console.log(`Loading!`);
             let scoreData = localStorage.getItem('score_data');
             let currentLevel = localStorage.getItem('current_level');
-
+            let records = localStorage.getItem('records');
             if(scoreData !== null && currentLevel !== null) {
                 console.log(`Found saves!`);
                 this.storage = JSON.parse(scoreData);
                 this.currentLevel = currentLevel * 1;
+                this.records = records;
             } else {
                 console.log(`Saves not found!`);
             }
@@ -139,6 +150,7 @@ class StatisticsManager {
         }
         localStorage.removeItem('score_data');
         localStorage.removeItem('current_level');
+        localStorage.removeItem('records')
     }
 
     calculateFinalGameScore(){
@@ -146,6 +158,11 @@ class StatisticsManager {
         for(let storageItem of this.storage){
             totalGameScore += storageItem.total;
         }
+    }
 
+    shiftRecords(recordNumber){
+        for(let i = this.records.length; i > recordNumber; i--){
+            this.records[i] = this.records[i - 1];
+        }
     }
 }

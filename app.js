@@ -53,8 +53,19 @@ function startLevel(l) {
         delayStart(l);
     } else {
         let totalScore = 0;
+        let records = getStatisticsManager().records;
         for(let s of getStatisticsManager().storage) {
-            totalScore += s.score;
+            totalScore += s.total;
+        }
+
+        for(let i = 0; i < 5; i++){
+            if(totalScore < records[i])
+                continue;
+            getStatisticsManager().shiftRecords(i);
+            records[i] = totalScore;
+            let name = getNewHeroName();
+            records[i].name = name;
+            break;
         }
         getStatisticsManager().save();
         getGameManager().clearScreen();
@@ -69,6 +80,14 @@ function resourcesLoaded() {
     // Loading start level
     setTimeout(() => { startLevel(currentLevel) }, 100);
     console.log('loaded all');
+}
+
+function getNewHeroName() {
+    let username = prompt('What a hero! You\'ve beaten one of the record. Enter your name.', 'username');
+    if(username === null || username === ''){
+        username = 'undefined user';
+    }
+    return username;
 }
 
 function togglePause() {
@@ -128,15 +147,15 @@ function scoreboard(en) {
     if(en) {
         scoreboardTextElement.innerHTML = '';
         scoreboardElement.style.display = 'block';
-
-        for(let i = 0; i < gameScenes.length; i++) {
-            scoreboardTextElement.innerHTML += (`<b>${gameScenes[i].title}</b><br />`);
-            scoreboardTextElement.innerHTML += (`Enemies killed: ${getStatisticsManager().storage[i].killed}<br />`);
-            scoreboardTextElement.innerHTML += (`Shots fired: ${getStatisticsManager().storage[i].fired}<br />`);
-            scoreboardTextElement.innerHTML += (`Time: ${getStatisticsManager().getTimeString(getStatisticsManager().storage[i].time)}<br />`);
-            scoreboardTextElement.innerHTML += (`Score: ${getStatisticsManager().storage[i].total}<br /><br />`);
+        let records = getStatisticsManager().records;
+        if(records.length === 0){
+            scoreboardTextElement.innerHTML = "There're no records!";
+            return;
         }
-
+        scoreboardTextElement.innerHTML += (`<b>Total score</b><br />`);
+        for(let i = 0; i < records.length; i++) {
+            scoreboardTextElement.innerHTML += (`Name: ${records[i].name} Score: ${records.total}<br />`);
+        }
     } else {
         scoreboardElement.style.display = 'none';
     }
