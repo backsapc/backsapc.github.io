@@ -5,7 +5,7 @@ class StatisticsManager {
         this.records = [];
         for(let i = 0; i < 5; i++) {
             this.records[i] = {};
-            this.records[i].name = '';
+            this.records[i].name = 'No record';
             this.records[i].total = 0;
         }
         this.clearAll();
@@ -82,7 +82,7 @@ class StatisticsManager {
         this.records = [];
         for(let i = 0; i < 5; i++) {
             this.records[i] = {};
-            this.records[i].name = '';
+            this.records[i].name = 'No record';
             this.records[i].total = 0;
         }
         for(let i = 0; i < gameScenes.length; i++) {

@@ -154,7 +154,7 @@ function scoreboard(en) {
             return;
         }
         for(let i = 0; i < records.length; i++) {
-            scoreboardTextElement.innerHTML += (`Name: ${records[i].name} Score: ${records.total}<br />`);
+            scoreboardTextElement.innerHTML += (`Name: ${records[i].name} Score: ${records[i].total}<br />`);
         }
     } else {
         scoreboardElement.style.display = 'none';
