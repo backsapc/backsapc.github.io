@@ -142,6 +142,7 @@ function div(val, by){
 }
 
 function scoreboard(en) {
+    hideAll();
     let scoreboardElement = document.getElementById('scoreboard');
     let scoreboardTextElement = document.getElementById('scoreboard-text');
     if(en) {
@@ -152,7 +153,6 @@ function scoreboard(en) {
             scoreboardTextElement.innerHTML = "There're no records!";
             return;
         }
-        scoreboardTextElement.innerHTML += (`<b>Total score</b><br />`);
         for(let i = 0; i < records.length; i++) {
             scoreboardTextElement.innerHTML += (`Name: ${records[i].name} Score: ${records.total}<br />`);
         }
@@ -161,6 +161,22 @@ function scoreboard(en) {
     }
 }
 
+function clearRecords() {
+    getStatisticsManager().clearAll();
+    scoreboard(true);
+}
+
+function backToMain() {
+    scoreboard(false);
+    menu.style.display = 'block';
+}
+
+
+function hideAll() {
+    menu.style.display = 'none';
+    canvas.style.display = 'none';
+    scoreboardElement.style.display = 'none';
+}
 
 function loadAll() {
     menu.style.display = 'none';

@@ -54,6 +54,16 @@
                 <canvas id="canvas" width="900px" height="640px" style="display: none;">
                     Your browser does not support CANVAS
                 </canvas>
+                <div id="scoreboard" class="w3-display-middle w3-allerta" >
+                    <div class="w3-large w3-padding">Hero board:</div>
+                    <div id="scoreboard-text" ></div>
+                    <button class="w3-allerta w3-black w3-xlarge" onclick="clearRecords();">
+                        Clear records
+                    </button>
+                    <button class="w3-allerta w3-black w3-xlarge" onclick="backToMain();">
+                        Back to main
+                    </button>
+                </div>
             </div>
         </div>
 <script>
@@ -62,6 +72,7 @@
     let menu = document.getElementById('menu');
     let inGameMenu = document.getElementById('in-game-menu');
     let mainMenu = document.getElementById('main-menu');
+    let scoreboardElement = document.getElementById('scoreboard');
 </script>
 <script src="engine/MapManager.js"></script>
 <script src="engine/SpriteManager.js"></script>
